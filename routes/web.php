@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// Admin===================================
+Route::get('admin','admin\dashboard@depan');
