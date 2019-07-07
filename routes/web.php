@@ -14,5 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// Admin===================================
-Route::get('admin','admin\dashboard@depan');
+// Dashboard===================================
+Route::get('dashboard','admin\dashboard@depan');
+Route::resource('admin','admin\admincontroller');
+Route::resource('user','admin\usercontroller');
+Route::resource('supplier','admin\supliercontroller');
+Route::resource('kategori-barang','admin\kategoribarangcontroller');
+Route::resource('uom-barang','admin\uombarangcontroller');
+Route::resource('pembelian','admin\pembeliancontroller');
