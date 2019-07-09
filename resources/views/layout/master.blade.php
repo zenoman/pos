@@ -51,11 +51,11 @@
     <li class="submenu"> <a href="#"><i class="icon icon-tasks"></i> <span>Master Data</span></a>
       <ul>
         <li><a href="{{url('kategori-barang')}}">Kategori Barang</a></li>
-        <li><a href="{{url('uom-barang')}}">UOM</a></li><!-- 
-        <li><a href="form-wizard.html">Suplier</a></li> -->
+        <li><a href="{{url('uom-barang')}}">UOM</a></li>
+        <li><a href="{{url('warna')}}">Warna</a></li>
       </ul>
     </li>
-    <li class="active"><a href="#"><i class="icon icon-th-large"></i> <span>Data Barang</span></a>
+    <li class="active"><a href="{{url('barang')}}"><i class="icon icon-th-large"></i> <span>Data Barang</span></a>
     </li>
     <li class="active"><a href="{{url('pembelian')}}"><i class="icon icon-plus"></i> <span>Pembelian</span></a>
     </li>

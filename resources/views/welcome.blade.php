@@ -84,7 +84,9 @@
                     Project Amerta
                 </div>
 
-               
+               <div class="links">
+                    <a href="{{url('dashboard')}}">Home</a>
+                </div>
             </div>
         </div>
     </body>
