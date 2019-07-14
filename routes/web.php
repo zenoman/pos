@@ -42,3 +42,6 @@ Route::resource('warna','admin\warnacontroller');
 //barang
 Route::resource('barang','admin\barangcontroller');
 Route::get('import-barang','admin\barangcontroller@import');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -24,14 +24,25 @@
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse"><ul class="nav">
-    <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-    <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-user"></i> <span class="text">Jhon Doe</span> <b class="caret"></b></a>
-      <ul class="dropdown-menu">
+    
+    <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-user"></i> <span class="text">{{ Auth::user()->name }}</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu text-left">
         <li><a class="sInbox" title="" href="#">Edit Profile</a></li>
-        <li><a class="sAdd" title="" href="#">Logout</a></li>
+        <li>
+        <!--   <a class="sAdd" title="" href="#">Logout</a> -->
+           <a class="sAdd" title="" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+        </li>
       </ul>
     </li>
-    
+    <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
   
   </ul>
 </div>
