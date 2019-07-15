@@ -2,7 +2,8 @@
 <html lang="en">
 	
 <head>
-		<title>AmartaLink</title><meta charset="UTF-8" />
+  @yield('header')
+		
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
 		<link rel="stylesheet" href="{{asset('assets/css/bootstrap-responsive.min.css')}}" />
@@ -27,7 +28,7 @@
     
     <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-user"></i> <span class="text">{{ Auth::user()->name }}</span> <b class="caret"></b></a>
       <ul class="dropdown-menu text-left">
-        <li><a class="sInbox" title="" href="#">Edit Profile</a></li>
+        <li><a class="sInbox" title="" href="{{url('admin/'.Auth::user()->id)}}">Edit Profile</a></li>
         <li>
         <!--   <a class="sAdd" title="" href="#">Logout</a> -->
            <a class="sAdd" title="" href="{{ route('logout') }}"
@@ -42,7 +43,7 @@
         </li>
       </ul>
     </li>
-    <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+    <li class=""><a title="" href="{{url('setting')}}"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
   
   </ul>
 </div>

@@ -198,19 +198,47 @@ DELETE FROM `tb_kategori`;
 -- Dumping structure for table amerta.tb_setting
 DROP TABLE IF EXISTS `tb_setting`;
 CREATE TABLE IF NOT EXISTS `tb_setting` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_web` varchar(50) DEFAULT NULL,
-  `logo` text,
-  `favicon` text,
-  `singkatan` varchar(50) DEFAULT NULL,
-  `deskripsi` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idsettings` int(11) NOT NULL AUTO_INCREMENT,
+  `webName` varchar(100) DEFAULT NULL,
+  `kontak1` varchar(45) DEFAULT NULL,
+  `kontak2` varchar(45) DEFAULT NULL,
+  `kontak3` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `ico` varchar(45) DEFAULT NULL,
+  `meta` text,
+  `logo` varchar(50) DEFAULT NULL,
+  `keterangan` text,
+  `alamat` text,
+  `nama_toko` int(11) DEFAULT NULL,
+  `max_tgl` int(5) DEFAULT NULL,
+  `peraturan` text,
+  `bulansistem` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idsettings`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table amerta.tb_setting: ~0 rows (approximately)
 DELETE FROM `tb_setting`;
 /*!40000 ALTER TABLE `tb_setting` DISABLE KEYS */;
+INSERT INTO `tb_setting` (`idsettings`, `webName`, `kontak1`, `kontak2`, `kontak3`, `email`, `ico`, `meta`, `logo`, `keterangan`, `alamat`, `nama_toko`, `max_tgl`, `peraturan`, `bulansistem`) VALUES
+	(2, 'amarta', '001', '002', '003', 'anakmbarep999@gmail.com', '1563174650-fagmk.png', NULL, '1563174650-logogmk.png', 'halo halo', 'gurah', NULL, 7, 'coba coba', 1);
 /*!40000 ALTER TABLE `tb_setting` ENABLE KEYS */;
+
+-- Dumping structure for table amerta.tb_warna
+DROP TABLE IF EXISTS `tb_warna`;
+CREATE TABLE IF NOT EXISTS `tb_warna` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(30) DEFAULT NULL,
+  `warna` varchar(30) DEFAULT NULL,
+  `hex` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table amerta.tb_warna: ~1 rows (approximately)
+DELETE FROM `tb_warna`;
+/*!40000 ALTER TABLE `tb_warna` DISABLE KEYS */;
+INSERT INTO `tb_warna` (`id`, `kode`, `warna`, `hex`) VALUES
+	(3, 'm001', 'merah', '#ff0000');
+/*!40000 ALTER TABLE `tb_warna` ENABLE KEYS */;
 
 -- Dumping structure for table amerta.users
 DROP TABLE IF EXISTS `users`;
@@ -223,14 +251,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table amerta.users: ~2 rows (approximately)
+-- Dumping data for table amerta.users: ~4 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `no_telp`, `username`, `level`, `email`, `password`) VALUES
 	(2, 'deva satrio', '00889', 'devasatrio', 'programmer', 'deva@gmail.com', '$2y$10$t9D98o5ivC4b165XWP9THO4Y.Cc9Vdy18NuZEWWrP1xOkHth512V2'),
-	(3, 'dian ade setiawan', '0889292', 'dian', 'super_admin', 'dian@gmail.com', '$2y$10$szbUEcmxAf.71Y1zrnCDvOmDJo4fvDav1kxT6bNgGoezk.bUfuqNW');
+	(3, 'dian ade setiawan', '0889292', 'dian', 'super_admin', 'dian@gmail.com', '$2y$10$szbUEcmxAf.71Y1zrnCDvOmDJo4fvDav1kxT6bNgGoezk.bUfuqNW'),
+	(4, 'owner', '032984290', 'owner', 'super_admin', 'owner123@gmal.com', '$2y$10$MiDu8/owBFbvwzQqZRkubOmrE/aG8GIY.29ngaZLpGc28CEpDfGQW'),
+	(5, 'admin', '203849320', 'admin', 'admin', 'admin@gmail.com', '$2y$10$9XpmTwNA4ZEo7O1OgFO89eYCOnR1xy9u2TkzPx6j9XR88L.r80UAq');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

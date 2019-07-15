@@ -1,5 +1,10 @@
 @extends('layout.master')
-
+@section('header')
+  @foreach($websetting as $web)
+  <title>{{$web->webName}}</title><meta charset="UTF-8" />
+  <link href="{{asset('img/setting/'.$web->ico)}}" rel="icon" type="image/png">
+  @endforeach
+@endsection
 @section('content')
 <div id="content">
       <div id="content-header">
@@ -12,6 +17,10 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span8">
+        @if (session('status'))
+        <div class="alert alert-success alert-block"> <a class="close" data-dismiss="alert" href="#">×</a>
+              {{ session('status') }}</div>
+        @endif
         <div class="widget-box">
           <div class="widget-title">
              <span class="icon"><i class="icon-th"></i></span> 
@@ -30,110 +39,30 @@
                 </tr>
               </thead>
               <tbody>
+                @php
+                $i=1;
+                @endphp
+               @foreach($data as $row)
+                <tr>
+                  <td>{{$i++}}</td>
+                  <td>{{$row->kode}}</td>
+                  <td>{{$row->warna}}</td>
+                  <td style="text-align: center;">
+                    <span class="label label-default" style="background-color:{{$row->hex}};">
+                      {{$row->hex}}
+                    </span>
+                  </td>
+                  <td style="text-align: center;">
+                   <form method="post" action="warna/{{$row->id}}">
+                                              <input type="hidden" name="_method" value="DELETE">
+                                              {{csrf_field()}}
+                                              <a href="#editdata{{$row->id}}" data-toggle="modal" class="btn btn-success"><i class="icon icon-wrench"></i></a>
+                                              <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="icon icon-trash"></i></button>
+                                          </form>
+                  </td>
+                </tr>
+              @endforeach
                
-                <tr>
-                  <td>1</td>
-                  <td>001</td>
-                  <td>Biru</td>
-                  <td style="text-align: center;">
-                    <span class="label label-default" style="background-color:#4b68b4;">
-                      #4b68b4
-                    </span>
-                  </td>
-                  <td style="text-align: center;">
-                    <button class="btn btn-success"><i class="icon icon-wrench"></i></button>
-                    <button class="btn btn-danger"><i class="icon icon-trash"></i></button>
-                  </td>
-                </tr>
-                  
-                <tr>
-                  <td>2</td>
-                  <td>002</td>
-                  <td>Hijau</td>
-                  <td style="text-align: center;">
-                    <span class="label label-default" style="background-color:#426a15;">
-                      #426a15
-                    </span>
-                  </td>
-                  <td style="text-align: center;">
-                    <button class="btn btn-success"><i class="icon icon-wrench"></i></button>
-                    <button class="btn btn-danger"><i class="icon icon-trash"></i></button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>3</td>
-                  <td>003</td>
-                  <td>Biru Muda</td>
-                  <td style="text-align: center;">
-                    <span class="label label-default" style="background-color:#00ffff;">
-                      #00ffff
-                    </span>
-                  </td>
-                  <td style="text-align: center;">
-                    <button class="btn btn-success"><i class="icon icon-wrench"></i></button>
-                    <button class="btn btn-danger"><i class="icon icon-trash"></i></button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>4</td>
-                  <td>004</td>
-                  <td>Hijau Daun</td>
-                  <td style="text-align: center;">
-                    <span class="label label-default" style="background-color:#40bf56;">
-                      #40bf56
-                    </span>
-                  </td>
-                  <td style="text-align: center;">
-                    <button class="btn btn-success"><i class="icon icon-wrench"></i></button>
-                    <button class="btn btn-danger"><i class="icon icon-trash"></i></button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>5</td>
-                  <td>005</td>
-                  <td>Merah Muda</td>
-                  <td style="text-align: center;">
-                    <span class="label label-default" style="background-color:#c82bd5;">
-                      #c82bd5
-                    </span>
-                  </td>
-                  <td style="text-align: center;">
-                    <button class="btn btn-success"><i class="icon icon-wrench"></i></button>
-                    <button class="btn btn-danger"><i class="icon icon-trash"></i></button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>6</td>
-                  <td>006</td>
-                  <td>Hitam</td>
-                  <td style="text-align: center;">
-                    <span class="label label-default" style="background-color:#000040;">
-                      #000040
-                    </span>
-                  </td>
-                  <td style="text-align: center;">
-                    <button class="btn btn-success"><i class="icon icon-wrench"></i></button>
-                    <button class="btn btn-danger"><i class="icon icon-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>007</td>
-                  <td>Ungu</td>
-                  <td style="text-align: center;">
-                    <span class="label label-default" style="background-color:#8080c0;">
-                      #8080c0
-                    </span>
-                  </td>
-                  <td style="text-align: center;">
-                    <button class="btn btn-success"><i class="icon icon-wrench"></i></button>
-                    <button class="btn btn-danger"><i class="icon icon-trash"></i></button>
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -146,24 +75,24 @@
             <h5>Tambah Data Warna</h5>
           </div>
           <div class="widget-content nopadding">
-            <form action="#" method="get" class="form-horizontal">
-           
+            <form action="warna" method="post" class="form-horizontal">
+            @csrf
               <div class="control-group">
                 <label class="control-label">Kode :</label>
                 <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
+                  <input type="text" class="span11" name="kode" required />
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Warna :</label>
                 <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
+                  <input type="text" class="span11" name="warna" required />
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Hexa :</label>
                 <div class="controls">
-                  <input type="color" class="span11" placeholder="" />
+                  <input type="color" class="span11" name="hex" required />
                 </div>
               </div>
             
@@ -178,6 +107,51 @@
     </div>
   </div>
     </div>
+    @foreach($data as $row)
+    <div id="editdata{{$row->id}}" class="modal hide">
+              <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Edit Data Warna</h3>
+              </div>
+              <div class="modal-body">
+                <form action="{{url('warna/'.$row->id)}}" method="post">
+              <div class="row-fluid">
+              <div class="span12"></div>
+              <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Kode :</label>
+                <div class="controls">
+                  <input type="text" class="span11" name="kode" value="{{$row->kode}}" />
+                </div>
+              </div>
+            </div>
+              <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Warna :</label>
+                <div class="controls">
+                  <input type="text" class="span11" name="warna" value="{{$row->warna}}"/>
+                </div>
+              </div>
+            </div>
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Hexa :</label>
+                <div class="controls">
+                  <input type="color" class="span3" name="hex" value="{{$row->hex}}" />
+                </div>
+              </div>
+            </div>
+            @csrf
+            <input type="hidden" name="_method" value="PUT">
+              </div>
+              <div class="form-actions text-right">
+                <button type="submit" class="btn btn-success">Simpan</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+              </div>
+            </form>
+              </div>
+            </div>
+          @endforeach
 @endsection
 @section('js')
 <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script> 

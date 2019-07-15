@@ -10,19 +10,18 @@
     </head>
     <body>
         <div id="loginbox">
-         @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror            
+          
             <form id="loginform" class="form-vertical" method="POST" action="{{ route('login') }}">
                 @csrf
                  <div class="control-group normal_text"> <h3>Login Admin</h3></div>
+                   @error('username')
+                                      <div class="alert alert-danger alert-block text-center"> 
+              Maaf, Username atau password salah, cek akun anda.</div>
+                                @enderror
+                                @error('password')
+                                     <div class="alert alert-danger alert-block text-center"> 
+              Maaf, Username atau password salah, cek akun anda.</div
+                                @enderror         
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
@@ -37,9 +36,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-actions">
-                    <span class="pull-left"><a href="{{url('/')}}" class="flip-link btn btn-primary" id="to-recover">Website Saya</a></span>
-                    <span class="pull-right"><input type="submit" class="btn btn-success" value="Login" /></span>
+                <div class="form-actions text-center">
+                    <input type="submit" class="btn btn-success" value="Login" />
+                    <a href="{{url('/')}}" class="flip-link btn btn-primary" id="to-recover">Website Saya</a>
+
                 </div>
             </form>
         </div>

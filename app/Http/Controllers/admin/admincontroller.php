@@ -12,8 +12,9 @@ class admincontroller extends Controller
     
     public function index()
     {
+        $websetting = DB::table('tb_setting')->limit(1)->get();
         $data = DB::table('users')->orderby('id','desc')->get();
-        return view('admin/index',['data'=>$data]);
+        return view('admin/index',['data'=>$data,'websetting'=>$websetting]);
     }
 
     /**
@@ -23,7 +24,8 @@ class admincontroller extends Controller
      */
     public function create()
     {
-        return view('admin/create');
+           $websetting = DB::table('tb_setting')->limit(1)->get();
+        return view('admin/create',['websetting'=>$websetting]);
     }
 
     /**
@@ -66,10 +68,11 @@ class admincontroller extends Controller
      */
     public function show($id)
     {
+          $websetting = DB::table('tb_setting')->limit(1)->get();
         $data = DB::table('users')
         ->where('id',$id)
         ->get();
-        return view('admin/edit',['data'=>$data]);
+        return view('admin/edit',['data'=>$data,'websetting'=>$websetting]);
     }
     
     public function update(Request $request, $id)

@@ -14,7 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// Dashboard===================================
+
+// Dashboard
 Route::get('dashboard','admin\dashboard@depan');
 
 //admin
@@ -38,6 +39,8 @@ Route::resource('pembelian','admin\pembeliancontroller');
 //warna
 Route::resource('warna','admin\warnacontroller');
 
+//settingweb
+Route::resource('setting','admin\settingcontroller');
 
 //barang
 Route::resource('barang','admin\barangcontroller');

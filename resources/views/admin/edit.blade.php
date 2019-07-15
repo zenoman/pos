@@ -1,5 +1,10 @@
 @extends('layout.master')
-
+@section('header')
+  @foreach($websetting as $web)
+  <title>{{$web->webName}}</title><meta charset="UTF-8" />
+  <link href="{{asset('img/setting/'.$web->ico)}}" rel="icon" type="image/png">
+  @endforeach
+@endsection
 @section('content')
 <div id="content">
       <div id="content-header">
