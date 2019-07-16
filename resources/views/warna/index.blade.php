@@ -54,11 +54,21 @@
                   </td>
                   <td style="text-align: center;">
                    <form method="post" action="warna/{{$row->id}}">
-                                              <input type="hidden" name="_method" value="DELETE">
-                                              {{csrf_field()}}
-                                              <a href="#editdata{{$row->id}}" data-toggle="modal" class="btn btn-success"><i class="icon icon-wrench"></i></a>
-                                              <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm"><i class="icon icon-trash"></i></button>
-                                          </form>
+                      <input type="hidden" name="_method" value="DELETE">
+                      {{csrf_field()}}
+                      <button 
+                        type="button" 
+                        class="btn btn-success tomboledit"
+                        data-kode="{{$row->kode}}"
+                        data-warna="{{$row->warna}}"
+                        data-hex="{{$row->hex}}"
+                        data-id="{{$row->id}}">
+                          <i class="icon icon-wrench"></i>
+                      </button>
+                      <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-danger btn-sm">
+                        <i class="icon icon-trash"></i>
+                      </button>
+                    </form>
                   </td>
                 </tr>
               @endforeach
@@ -107,21 +117,21 @@
     </div>
   </div>
     </div>
-    @foreach($data as $row)
-    <div id="editdata{{$row->id}}" class="modal hide">
+
+
+    <div id="editdata" class="modal hide">
               <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Edit Data Warna</h3>
               </div>
               <div class="modal-body">
-                <form action="{{url('warna/'.$row->id)}}" method="post">
+                <form action="#" id="editwarna" method="post">
               <div class="row-fluid">
               <div class="span12"></div>
               <div class="span12">
               <div class="control-group">
                 <label class="control-label">Kode :</label>
                 <div class="controls">
-                  <input type="text" class="span11" name="kode" value="{{$row->kode}}" />
+                  <input type="text" class="span11" name="kode" id="kode" />
                 </div>
               </div>
             </div>
@@ -129,7 +139,7 @@
               <div class="control-group">
                 <label class="control-label">Warna :</label>
                 <div class="controls">
-                  <input type="text" class="span11" name="warna" value="{{$row->warna}}"/>
+                  <input type="text" class="span11" name="warna" id="warna"/>
                 </div>
               </div>
             </div>
@@ -137,7 +147,7 @@
               <div class="control-group">
                 <label class="control-label">Hexa :</label>
                 <div class="controls">
-                  <input type="color" class="span3" name="hex" value="{{$row->hex}}" />
+                  <input type="color" class="span3" name="hex" id="hex"/>
                 </div>
               </div>
             </div>
@@ -146,14 +156,14 @@
               </div>
               <div class="form-actions text-right">
                 <button type="submit" class="btn btn-success">Simpan</button>
-                <button type="reset" class="btn btn-danger">Reset</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
               </div>
             </form>
               </div>
             </div>
-          @endforeach
 @endsection
 @section('js')
 <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script> 
 <script src="{{asset('assets/js/maruti.tables.js')}}"></script>
+<script src="{{asset('assets/js/page/warna.js')}}"></script>
 @endsection

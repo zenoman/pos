@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class supliercontroller extends Controller
@@ -14,28 +15,22 @@ class supliercontroller extends Controller
      */
     public function index()
     {
-        return view('suplier/index');
+        $websetting = DB::table('tb_setting')->limit(1)->get();
+        $data = DB::table('tb_supplier')->orderby('id','desc')->get();
+        return view('suplier/index',['websetting'=>$websetting,'data'=>$data]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        DB::table('tb_supplier')
+        ->insert([
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'no_telp'=>$request->no_telp,
+            'keterangan'=>$request->keterangan
+        ]);
+
+        return redirect('supplier')->with('status','Data berhasil disimpan');
     }
 
     /**
@@ -69,7 +64,15 @@ class supliercontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_supplier')
+        ->where('id',$id)
+        ->update([
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'no_telp'=>$request->no_telp,
+            'keterangan'=>$request->keterangan
+        ]);
+        return redirect('supplier')->with('status','Data berhasil diubah');
     }
 
     /**
@@ -80,6 +83,9 @@ class supliercontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('tb_supplier')
+        ->where('id',$id)
+        ->delete();
+        return redirect('supplier')->with('status','Data berhasil dihapus');
     }
 }

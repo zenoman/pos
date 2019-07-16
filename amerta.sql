@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `tb_kategori` (
   `kategori` varchar(100) DEFAULT NULL,
   `gambar` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table amerta.tb_kategori: ~0 rows (approximately)
 DELETE FROM `tb_kategori`;
@@ -223,6 +223,25 @@ INSERT INTO `tb_setting` (`idsettings`, `webName`, `kontak1`, `kontak2`, `kontak
 	(2, 'amarta', '001', '002', '003', 'anakmbarep999@gmail.com', '1563174650-fagmk.png', NULL, '1563174650-logogmk.png', 'halo halo', 'gurah', NULL, 7, 'coba coba', 1);
 /*!40000 ALTER TABLE `tb_setting` ENABLE KEYS */;
 
+-- Dumping structure for table amerta.tb_supplier
+DROP TABLE IF EXISTS `tb_supplier`;
+CREATE TABLE IF NOT EXISTS `tb_supplier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) DEFAULT NULL,
+  `alamat` text,
+  `no_telp` varchar(20) DEFAULT NULL,
+  `keterangan` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table amerta.tb_supplier: ~0 rows (approximately)
+DELETE FROM `tb_supplier`;
+/*!40000 ALTER TABLE `tb_supplier` DISABLE KEYS */;
+INSERT INTO `tb_supplier` (`id`, `nama`, `alamat`, `no_telp`, `keterangan`) VALUES
+	(2, 'dini ani', 'nganjuk bagor', '001', 'supplier sepatu'),
+	(3, 'deni', 'aklsdfj', '30924890', 'lkasdjklfskd');
+/*!40000 ALTER TABLE `tb_supplier` ENABLE KEYS */;
+
 -- Dumping structure for table amerta.tb_warna
 DROP TABLE IF EXISTS `tb_warna`;
 CREATE TABLE IF NOT EXISTS `tb_warna` (
@@ -231,13 +250,14 @@ CREATE TABLE IF NOT EXISTS `tb_warna` (
   `warna` varchar(30) DEFAULT NULL,
   `hex` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table amerta.tb_warna: ~1 rows (approximately)
 DELETE FROM `tb_warna`;
 /*!40000 ALTER TABLE `tb_warna` DISABLE KEYS */;
 INSERT INTO `tb_warna` (`id`, `kode`, `warna`, `hex`) VALUES
-	(3, 'm001', 'merah', '#ff0000');
+	(3, 'm001', 'merah', '#ff0000'),
+	(4, 'b001', 'biru muda', '#00ffff');
 /*!40000 ALTER TABLE `tb_warna` ENABLE KEYS */;
 
 -- Dumping structure for table amerta.users
