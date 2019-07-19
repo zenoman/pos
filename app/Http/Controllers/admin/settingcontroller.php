@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class settingcontroller extends Controller
 {
+	 public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
     	$websetting = DB::table('tb_setting')->limit(1)->get();
     	$data = DB::table('tb_setting')->limit(1)->get();

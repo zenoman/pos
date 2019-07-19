@@ -190,10 +190,27 @@ CREATE TABLE IF NOT EXISTS `tb_kategori` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table amerta.tb_kategori: ~0 rows (approximately)
+-- Dumping data for table amerta.tb_kategori: ~2 rows (approximately)
 DELETE FROM `tb_kategori`;
 /*!40000 ALTER TABLE `tb_kategori` DISABLE KEYS */;
+INSERT INTO `tb_kategori` (`id`, `kategori`, `gambar`) VALUES
+	(1, 'halo', '1563501353-gmk.jpg'),
+	(2, 'baju cewek', '1563502050-ff.jpg');
 /*!40000 ALTER TABLE `tb_kategori` ENABLE KEYS */;
+
+-- Dumping structure for table amerta.tb_merk
+DROP TABLE IF EXISTS `tb_merk`;
+CREATE TABLE IF NOT EXISTS `tb_merk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) DEFAULT NULL,
+  `gambar` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table amerta.tb_merk: ~1 rows (approximately)
+DELETE FROM `tb_merk`;
+/*!40000 ALTER TABLE `tb_merk` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_merk` ENABLE KEYS */;
 
 -- Dumping structure for table amerta.tb_setting
 DROP TABLE IF EXISTS `tb_setting`;
@@ -223,6 +240,23 @@ INSERT INTO `tb_setting` (`idsettings`, `webName`, `kontak1`, `kontak2`, `kontak
 	(2, 'amarta', '001', '002', '003', 'anakmbarep999@gmail.com', '1563174650-fagmk.png', NULL, '1563174650-logogmk.png', 'halo halo', 'gurah', NULL, 7, 'coba coba', 1);
 /*!40000 ALTER TABLE `tb_setting` ENABLE KEYS */;
 
+-- Dumping structure for table amerta.tb_sub_kategori
+DROP TABLE IF EXISTS `tb_sub_kategori`;
+CREATE TABLE IF NOT EXISTS `tb_sub_kategori` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_kategori` int(11) DEFAULT NULL,
+  `nama` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table amerta.tb_sub_kategori: ~2 rows (approximately)
+DELETE FROM `tb_sub_kategori`;
+/*!40000 ALTER TABLE `tb_sub_kategori` DISABLE KEYS */;
+INSERT INTO `tb_sub_kategori` (`id`, `id_kategori`, `nama`) VALUES
+	(2, 1, 'jilbab mantul'),
+	(3, 2, 'hola');
+/*!40000 ALTER TABLE `tb_sub_kategori` ENABLE KEYS */;
+
 -- Dumping structure for table amerta.tb_supplier
 DROP TABLE IF EXISTS `tb_supplier`;
 CREATE TABLE IF NOT EXISTS `tb_supplier` (
@@ -234,13 +268,30 @@ CREATE TABLE IF NOT EXISTS `tb_supplier` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table amerta.tb_supplier: ~0 rows (approximately)
+-- Dumping data for table amerta.tb_supplier: ~3 rows (approximately)
 DELETE FROM `tb_supplier`;
 /*!40000 ALTER TABLE `tb_supplier` DISABLE KEYS */;
 INSERT INTO `tb_supplier` (`id`, `nama`, `alamat`, `no_telp`, `keterangan`) VALUES
 	(2, 'dini ani', 'nganjuk bagor', '001', 'supplier sepatu'),
 	(3, 'deni', 'aklsdfj', '30924890', 'lkasdjklfskd');
 /*!40000 ALTER TABLE `tb_supplier` ENABLE KEYS */;
+
+-- Dumping structure for table amerta.tb_uom
+DROP TABLE IF EXISTS `tb_uom`;
+CREATE TABLE IF NOT EXISTS `tb_uom` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table amerta.tb_uom: ~2 rows (approximately)
+DELETE FROM `tb_uom`;
+/*!40000 ALTER TABLE `tb_uom` DISABLE KEYS */;
+INSERT INTO `tb_uom` (`id`, `nama`, `jumlah`) VALUES
+	(2, 'lusin', 12),
+	(3, 'kodi', 50);
+/*!40000 ALTER TABLE `tb_uom` ENABLE KEYS */;
 
 -- Dumping structure for table amerta.tb_warna
 DROP TABLE IF EXISTS `tb_warna`;
@@ -250,9 +301,9 @@ CREATE TABLE IF NOT EXISTS `tb_warna` (
   `warna` varchar(30) DEFAULT NULL,
   `hex` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table amerta.tb_warna: ~1 rows (approximately)
+-- Dumping data for table amerta.tb_warna: ~2 rows (approximately)
 DELETE FROM `tb_warna`;
 /*!40000 ALTER TABLE `tb_warna` DISABLE KEYS */;
 INSERT INTO `tb_warna` (`id`, `kode`, `warna`, `hex`) VALUES

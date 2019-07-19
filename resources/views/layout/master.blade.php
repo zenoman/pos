@@ -65,6 +65,7 @@
         <li><a href="{{url('kategori-barang')}}">Kategori Barang</a></li>
         <li><a href="{{url('uom-barang')}}">UOM</a></li>
         <li><a href="{{url('warna')}}">Warna</a></li>
+        <li><a href="{{url('merk-barang')}}">Merk</a></li>
       </ul>
     </li>
     <li class="active"><a href="{{url('barang')}}"><i class="icon icon-th-large"></i> <span>Data Barang</span></a>
@@ -81,7 +82,9 @@
 		</div>
 		
 		@yield('content')
-		
+		 <div class="row-fluid">
+      <div id="footer" class="span12">Develop By <a href="#">Joyoboyo Intermedia</a> </div>
+    </div>
             <script src="{{asset('assets/js/jquery.min.js')}}"></script>
             <script src="{{asset('assets/js/jquery.ui.custom.js')}}"></script>
             <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>

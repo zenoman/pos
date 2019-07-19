@@ -8,11 +8,10 @@ use App\Http\Controllers\Controller;
 
 class supliercontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $websetting = DB::table('tb_setting')->limit(1)->get();

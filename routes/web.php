@@ -29,7 +29,9 @@ Route::resource('supplier','admin\supliercontroller');
 
 //kategori
 Route::resource('kategori-barang','admin\kategoribarangcontroller');
-
+Route::post('simpan-subkategori','admin\kategoribarangcontroller@simpansubkategori');
+Route::get('hapussub/{id}','admin\kategoribarangcontroller@hapussubkategori');
+Route::post('editsub/{id}','admin\kategoribarangcontroller@editsubkategori');
 //uom
 Route::resource('uom-barang','admin\uombarangcontroller');
 
@@ -47,4 +49,8 @@ Route::resource('barang','admin\barangcontroller');
 Route::get('import-barang','admin\barangcontroller@import');
 Auth::routes();
 
+//merk
+Route::resource('merk-barang','admin\merkcontroller');
+
+//home
 Route::get('/home', 'HomeController@index')->name('home');

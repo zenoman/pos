@@ -49,5 +49,16 @@
         $('#formedit').attr('action','kategori-barang/'+kode);
         $('#editdata').modal('toggle');
      }); 
+
+    $('.tomboleditsub').on('click', function(){
+        var kode = $(this).data('kode');
+        var idkat = $(this).data('kategori');
+        var nama = $(this).data('nama');
+
+        $('#namasub').val(nama);
+        $('#kategorisub').val(idkat);
+         $('#formeditsub').attr('action','editsub/'+kode);
+        $('#editdatasub').modal('toggle');
+     }); 
  });
  

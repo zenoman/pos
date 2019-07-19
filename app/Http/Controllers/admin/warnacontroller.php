@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class warnacontroller extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $websetting = DB::table('tb_setting')->limit(1)->get();

@@ -9,16 +9,47 @@ use App\Http\Controllers\Controller;
 
 class kategoribarangcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function editsubkategori(Request $request,$id){
+        DB::table('tb_sub_kategori')
+        ->where('id',$id)
+        ->update([
+            'nama'=>$request->nama,
+            'id_kategori'=>$request->kategori
+        ]);
+
+        return redirect('kategori-barang')->with('status','Data Berhasil diubah');
+    }
+    //===================================================================
+    public function simpansubkategori(Request $request){
+        DB::table('tb_sub_kategori')
+        ->insert([
+            'nama'=>$request->nama,
+            'id_kategori'=>$request->kategori
+        ]);
+        return redirect('kategori-barang')->with('status','Data berhasil disimpan');
+    }
+
+    //=====================================================================
+    public function hapussubkategori($id){
+        DB::table('tb_sub_kategori')
+        ->where('id',$id)
+        ->delete();
+        return redirect('kategori-barang')->with('status','Data berhasil dihapus');
+    }
+    //=========================================================================
     public function index()
     {
         $websetting = DB::table('tb_setting')->limit(1)->get();
+        $datasub = DB::table('tb_sub_kategori')
+        ->select(DB::raw('tb_sub_kategori.*,tb_kategori.kategori as namakategori'))
+        ->leftjoin('tb_kategori','tb_kategori.id','=','tb_sub_kategori.id_kategori')
+        ->orderby('tb_sub_kategori.id','desc')->get();
         $data = DB::table('tb_kategori')->orderby('id','desc')->get();
-        return view('kategoribarang/index',['data'=>$data,'websetting'=>$websetting]);
+        return view('kategoribarang/index',['data'=>$data,'websetting'=>$websetting,'datasub'=>$datasub]);
     }
 
     public function store(Request $request)

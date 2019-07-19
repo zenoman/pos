@@ -16,173 +16,180 @@
           <div class="widget-title"> <span class="icon"> <i class="icon-plus"></i> </span>
             <h5>Tambah Data Barang</h5>
           </div>
-          <div class="widget-content nopadding">
-            <form action="#" method="get" class="form-horizontal">
-              <div class="row-fluid">
-              <div class="span6">
-              <div class="control-group">
-                <label class="control-label">Kode Barang :</label>
+          <div class="widget-content">
+             <div class="row-fluid">
+                <div class="span12">
+            <div class="widget-box" id="informasi-produk">
+              <div class="widget-title">
+                <span class="icon">
+                  <i class="icon-th-list"></i>
+                </span>
+                <h5>Informasi Produk</h5>
+              </div>
+              <div class="widget-content">
+                <div class="form-horizontal">
+                  <div class="control-group">
+                <label class="control-label">Nama Produk :</label>
                 <div class="controls">
-                  <input type="text" class="span11" value="BRG0001" readonly="" />
+                  <input type="text" class="span11">
                 </div>
               </div>
-            </div>
-            <div class="span6">
               <div class="control-group">
-                <label class="control-label">Nama Barang :</label>
+                <label class="control-label">Deskripsi Produk :</label>
                 <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
+                  <textarea name="" class="span11" rows="3"></textarea>
                 </div>
               </div>
-            </div>
-              </div>
-              <div class="row-fluid">
-              <div class="span6">
               <div class="control-group">
-                <label class="control-label">Kategori :</label>
+                <label class="control-label">Kategori & sub Kategori :</label>
                 <div class="controls">
-                  <select name="" id="" class="span11">
-                    <option value="">Baju</option>
-                    <option value="">Kemeja</option>
-                    <option value="">Jilbab</option>
-                    <option value="">Kaos Oblong</option>
+                  <select name="halo" id="" class="span5">
+                    <option value="">halo</option>
+                    <option value="">halo</option>
+                    <option value="">halo</option>
+                  </select>
+                  <select name="halo" id="" class="span6">
+                    <option value="">halo</option>
+                    <option value="">halo</option>
+                    <option value="">halo</option>
                   </select>
                 </div>
               </div>
-            </div>
-             <div class="span6">
               <div class="control-group">
-                <label class="control-label">Diskon :</label>
+                <label class="control-label">Merk :</label>
                 <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
-                </div>
-              </div>
-            </div>
-           </div>
-
-              <div class="row-fluid">
-              <div class="span6">
-              <div class="control-group">
-                <label class="control-label">Harga Beli :</label>
-                <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
-                </div>
-              </div>
-            </div>
-            <div class="span6">
-              <div class="control-group">
-                <label class="control-label">Harga Jual :</label>
-                <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
-                </div>
-              </div>
-            </div>
-           
-              </div>
-              <div class="row-fluid">
-                 <div class="span6">
-              <div class="control-group">
-                <label class="control-label">Foto :</label>
-                <div class="controls">
-                  <input type="file" class="span11" placeholder="" />
-                </div>
-              </div>
-            </div>
-              </div>
-              <div class="row-fluid">
-                 <div class="span12">
-              <div class="control-group">
-                <label class="control-label">Deskripsi</label>
-                <div class="controls">
-                  <textarea name="" id="" class="span11">
-                    
-                  </textarea>
-                </div>
-              </div>
-            </div>
-              </div>
-              <hr>
-              <div id="newlink">
-              <div class="row-fluid">
-              <div class="span4">
-              <div class="control-group">
-                <label class="control-label">Ukuran :</label>
-                <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
-                </div>
-              </div>
-            </div>
-             <div class="span4">
-              <div class="control-group">
-                <label class="control-label">Warna :</label>
-                <div class="controls">
-                  <select name="" id="" class="span11">
-                    <option value="">Merah</option>
-                    <option value="">Biru</option>
-                    <option value="">Hitam</option>
-                    <option value="">Ungu</option>
+                  <select name="halo" id="" class="span11">
+                    <option value="">halo</option>
+                    <option value="">halo</option>
+                    <option value="">halo</option>
                   </select>
                 </div>
               </div>
-            </div>
-            <div class="span4">
-              <div class="control-group">
-                <label class="control-label">Stok :</label>
+               <div class="control-group">
+                <label class="control-label">Asal Produk :</label>
                 <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
+                  <input type="text" class="span11">
                 </div>
               </div>
-            </div>
-           </div>
-         </div>
-           <div id="addnew">
-           </div>
-              <div class="form-actions">
-                <a href="javascript:new_link()" class="btn btn-warning"><i class="fa fa-plus"></i> Tambah Variasi</a>
-                <button type="submit" class="btn btn-success">Simpan</button>
-                <button type="button" onclick="history.go(-1)" class="btn btn-danger">Kembali</button>
+               <div class="control-group">
+                <label class="control-label">Bahan :</label>
+                <div class="controls">
+                  <input type="text" class="span11">
+                </div>
               </div>
-            </form>
+                </div>
+                
+              </div>
+            </div>
+            <div class="widget-box" id="informasi-penjualan">
+              <div class="widget-title">
+                <span class="icon">
+                  <i class="icon-th-list"></i>
+                </span>
+                <h5>Informasi Penjualan</h5>
+              </div>
+              <div class="widget-content">
+                <div class="form-horizontal">
+                  <div class="control-group">
+                <label class="control-label">Variasi 1 :</label>
+                <div class="controls">
+                  <input type="text" class="span10">
+                  <button class="btn btn-primary add-on">Tambah</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Variasi 2 :</label>
+                <div class="controls">
+                  <input type="text" class="span10">
+                  <button class="btn btn-primary add-on">Tambah</button>
+                </div>
+              </div>
+                </div>
+                <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  
+                  <th>Nama</th>
+                  <th>Nama</th>
+                  <th>Harga</th>
+                  <th>Stok</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  
+                  <td>Row 1</td>
+                  <td>Row 2</td>
+                  <td>Row 3</td>
+                  <td>Row 4</td>
+                </tr>
+                <tr>
+                  
+                  <td>Row 1</td>
+                  <td>Row 2</td>
+                  <td>Row 3</td>
+                  <td>Row 4</td>
+                </tr>
+                <tr>
+                  
+                  <td>Row 1</td>
+                  <td>Row 2</td>
+                  <td>Row 3</td>
+                  <td>Row 4</td>
+                </tr>
+                <tr>
+                  
+                  <td>Row 1</td>
+                  <td>Row 2</td>
+                  <td>Row 3</td>
+                  <td>Row 4</td>
+                </tr>
+              </tbody>
+            </table>
+              </div>
+            </div>
+            <div class="widget-box" id="informasi-produk">
+              <div class="widget-title">
+                <span class="icon">
+                  <i class="icon-th-list"></i>
+                </span>
+                <h5>Pengaturan Media</h5>
+              </div>
+              <div class="widget-content">
+                <div class="form-horizontal">
+                  <div class="control-group">
+                <label class="control-label">Foto Produk :</label>
+                <div class="controls">
+                  <input type="text" class="span11">
+                </div>
+              </div>
+             
+                </div>
+                
+              </div>
+            </div>
+          </div>
+                <!-- <div class="span3">
+              <div class="widget-box">
+              <div class="widget-title">
+               
+                <h5>Navigation</h5>
+              </div>
+              <div class="widget-content">
+               <a href="#informasi-produk" class="btn btn-primary btn-block">Informasi Produk</a>
+               <a href="#informasi-penjualan" class="btn btn-primary btn-block">Informasi Penjualan</a>
+               <a href="#informasi-produk" class="btn btn-primary btn-block">Pengaturan Media</a>
+              </div>
+            </div>
+            
+          </div> -->
+              </div>
           </div>
         </div>
       </div>
     </div>
   </div>
     </div>
-            <div id="newlinktpl" style="display:none" class="form-group">
-            <hr>
-            <div class="row-fluid">
-              <div class="span4">
-              <div class="control-group">
-                <label class="control-label">Ukuran :</label>
-                <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
-                </div>
-              </div>
-            </div>
-             <div class="span4">
-              <div class="control-group">
-                <label class="control-label">Warna :</label>
-                <div class="controls">
-                  <select name="" id="" class="span11">
-                    <option value="">Merah</option>
-                    <option value="">Biru</option>
-                    <option value="">Hitam</option>
-                    <option value="">Ungu</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="span4">
-              <div class="control-group">
-                <label class="control-label">Stok :</label>
-                <div class="controls">
-                  <input type="text" class="span11" placeholder="" />
-                </div>
-              </div>
-            </div>
-           </div>
-        </div>
         @endsection
 
         @section('js')
