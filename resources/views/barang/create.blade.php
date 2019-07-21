@@ -93,24 +93,29 @@
                   <div class="control-group">
                 <label class="control-label">Variasi 1 :</label>
                 <div class="controls">
-                  <input type="text" class="span10">
-                  <button class="btn btn-primary add-on">Tambah</button>
+                  <input type="text" class="span10" id="variasisatu1" onchange="variasisatu(1)">
+                  <button type="button" id="addinput" class="btn btn-primary add-on" onClick="addInput('dynamicInput');" style="display: none;">Tambah</button>
                 </div>
+                
               </div>
+              <div id="dynamicInput">
+            </div>
+
               <div class="control-group">
                 <label class="control-label">Variasi 2 :</label>
                 <div class="controls">
-                  <input type="text" class="span10">
                   <button class="btn btn-primary add-on">Tambah</button>
                 </div>
               </div>
                 </div>
-                <table class="table table-bordered table-striped">
+                <div id="tabelvariasi" style="display: none;">
+                    <hr>
+                <table class="table table-bordered table-striped" id="listvariasi">
               <thead>
                 <tr>
                   
-                  <th>Nama</th>
-                  <th>Nama</th>
+                  <th>variasi 1</th>
+                  <th>variasi 2</th>
                   <th>Harga</th>
                   <th>Stok</th>
                 </tr>
@@ -118,34 +123,15 @@
               <tbody>
                 <tr>
                   
-                  <td>Row 1</td>
-                  <td>Row 2</td>
-                  <td>Row 3</td>
-                  <td>Row 4</td>
-                </tr>
-                <tr>
-                  
-                  <td>Row 1</td>
-                  <td>Row 2</td>
-                  <td>Row 3</td>
-                  <td>Row 4</td>
-                </tr>
-                <tr>
-                  
-                  <td>Row 1</td>
-                  <td>Row 2</td>
-                  <td>Row 3</td>
-                  <td>Row 4</td>
-                </tr>
-                <tr>
-                  
-                  <td>Row 1</td>
-                  <td>Row 2</td>
-                  <td>Row 3</td>
-                  <td>Row 4</td>
+                  <td style="text-align: center;" id="tvariasisatu1"></td>
+                  <td style="text-align: center;">Row 2</td>
+                  <td style="text-align: center;">Row 3</td>
+                  <td style="text-align: center;">Row 4</td>
                 </tr>
               </tbody>
             </table>
+                </div>
+              
               </div>
             </div>
             <div class="widget-box" id="informasi-produk">
@@ -193,46 +179,5 @@
         @endsection
 
         @section('js')
-     
-        <script type="text/javascript">
-         
-var ct = 1;
-function new_link()
-{
-    ct++;
-    var div1 = document.createElement('div');
-    div1.id = ct;
-    // link to delete extended form elements
-    var delLink = '<div align="right"><br><a href="javascript:delIt('+ ct +')" class="btn btn-danger" style="margin-right:20px;"><i class="fa fa-trash"></i> Hapus Variasi</a><br></br></div>';
-    div1.innerHTML = document.getElementById('newlinktpl').innerHTML + delLink;
-    document.getElementById('newlink').appendChild(div1);
-}
-// function to delete the newly added set of elements
-function delIt(eleId)
-{
-    d = document;
-    var ele = d.getElementById(eleId);
-    var parentEle = d.getElementById('newlink');
-    parentEle.removeChild(ele);
-}
-function validate(frm)
-{
-    var ele = frm.elements['feedurl[]'];
-    if (! ele.length)
-    {
-        alert(ele.value);
-    }
-    for(var i=0; i<ele.length; i++)
-    {
-        alert(ele[i].value);
-    }
-    return true;
-}
-function add_feed()
-{
-    var div1 = document.createElement('div');
-    div1.innerHTML = document.getElementById('newlinktpl').innerHTML;
-    document.getElementById('newlink').appendChild(div1);
-}
-</script>
+     <script src="{{asset('assets/js/page/tambahbarang.js')}}"></script>
 @endsection
