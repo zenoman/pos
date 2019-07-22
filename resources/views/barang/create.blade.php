@@ -93,7 +93,8 @@
                   <div class="control-group">
                 <label class="control-label">Variasi 1 :</label>
                 <div class="controls">
-                  <input type="text" class="span10" id="variasisatu1" onchange="variasisatu(1)">
+                  <input type="text" class="span5" id="namavariasisatu" placeholder="Nama variasi, contoh (warna ,ukuran ,size)">
+                  <input type="text" class="span5" id="variasisatu1" onchange="variasisatu(1)">
                   <button type="button" id="addinput" class="btn btn-primary add-on" onClick="addInput('dynamicInput');" style="display: none;">Tambah</button>
                 </div>
                 
@@ -103,10 +104,17 @@
 
               <div class="control-group">
                 <label class="control-label">Variasi 2 :</label>
-                <div class="controls">
-                  <button class="btn btn-primary add-on">Tambah</button>
+                <div class="controls" id="aktivkanvariasidua">
+                <button type="button" id="btnvairasidua" class="btn btn-success add-on">Aktivkan</button>
+                </div>
+                <div class="controls" style="display: none;" id="aksesvariasidua">
+                  <input type="text" class="span5" id="namavariasidua" placeholder="Nama variasi, contoh (warna ,ukuran ,size)">
+                  <input type="text" class="span5" id="variasidua1" onchange="variasidua(1)">
+                  <button type="button" id="addinputdua" class="btn btn-primary add-on" onClick="addInputdua('dynamicInput2');">Tambah</button>
                 </div>
               </div>
+               <div id="dynamicInput2">
+            </div>
                 </div>
                 <div id="tabelvariasi" style="display: none;">
                     <hr>
@@ -114,8 +122,7 @@
               <thead>
                 <tr>
                   
-                  <th>variasi 1</th>
-                  <th>variasi 2</th>
+                  <th id="tnamavariasisatu">variasi 1</th>
                   <th>Harga</th>
                   <th>Stok</th>
                 </tr>
@@ -124,14 +131,38 @@
                 <tr>
                   
                   <td style="text-align: center;" id="tvariasisatu1"></td>
-                  <td style="text-align: center;">Row 2</td>
+                  
                   <td style="text-align: center;">Row 3</td>
                   <td style="text-align: center;">Row 4</td>
                 </tr>
               </tbody>
             </table>
                 </div>
-              
+
+
+              <div id="tabelvariasi2" style="display: none;">
+                    <hr>
+                <table class="table table-bordered table-striped" id="listvariasi2">
+              <thead>
+                <tr>
+                  
+                  <th id="tnamavariasisatu2">variasi 1</th>
+                 <th id="tnamavariasidua">variasi 2</th>
+                  <th>Harga</th>
+                  <th>Stok</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  
+                  <td style="text-align: center;" id="tvariasisatu21" class="v1"></td>
+                  <td style="text-align: center;"><span style="color:grey">Kosong</span></td>
+                  <td style="text-align: center;">Row 3</td>
+                  <td style="text-align: center;">Row 4</td>
+                </tr>
+              </tbody>
+            </table>
+                </div>
               </div>
             </div>
             <div class="widget-box" id="informasi-produk">
