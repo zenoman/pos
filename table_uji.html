@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Uji</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $('document').ready(function(){            
+            var b=false;
+            $('#adtb').click(function(){       
+                b=false;         
+                $('tb').append('<table id="tabel" border="1"><thead><tr id="tvar"><th>Nama</th><th class="var">varian 2</th><th>Stok</th><th>Harga</th><th>Kode</th></tr></thead></table>');
+                $('.var').hide();
+            });
+            $('#advar').click(function(){
+                b=true;
+                $('.var').show();
+            });
+            $('#adtr').click(function(){
+                if(b==true){
+                $('#tabel').append('<tr><td>bar</td><td>Var</td><td>Stok</td><td>Harga</td><td>Kode</td></tr>');
+                }else{
+                $('#tabel').append('<tr><td>bar</td><td>Stok</td><td>Harga</td><td>Kode</td></tr>');
+                }
+            });
+        });
+    </script>
+</head>
+<body>    
+    <Button id="adtb">Buat Table</Button>
+    <Button id="advar">Buat Varian</Button>
+    <Button id="adtr">Tambah Row</Button>
+    <tb></tb>
+    
+</body>
+</html>
