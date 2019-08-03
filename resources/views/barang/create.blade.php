@@ -29,6 +29,20 @@
               <div class="widget-content">
                 <div class="form-horizontal">
                   <div class="control-group">
+                    
+                <label class="control-label">&nbsp;</label>
+                <div class="controls">
+                  {!! QrCode::size(200)->generate($newkode); !!}
+                </div>
+              </div>
+                  <div class="control-group">
+                <label class="control-label">Kode Produk :</label>
+                <div class="controls">
+                  <input type="text" class="span11" name="newkode" id="newkode" readonly value="{{$newkode}}">
+                  <input type="hidden" class="span11" name="kode" id="newkode" readonly value="{{$kode}}">
+                </div>
+              </div>
+                  <div class="control-group">
                 <label class="control-label">Nama Produk :</label>
                 <div class="controls">
                   <input type="text" class="span11">
@@ -97,24 +111,13 @@
                   <input type="text" class="span5" id="variasisatu1" onchange="variasisatu(1)">
                   <button type="button" id="addinput" class="btn btn-primary add-on" onClick="addInput('dynamicInput');" style="display: none;">Tambah</button>
                 </div>
-
-               <!--  <Button id="adtb" class="btn btn-primary">Aktifkan Variasi 1</Button> -->
-              <!--   <div class="controls">
-                    <div class="inp"></div><br>
-                    <Button class="btn btn-info" id="adtr">Tambah Row</Button>
-                </div>  -->               
+               
               </div>
               <div id="dynamicInput">
               </div> 
 
               <div class="control-group">
                 <label class="control-label">Variasi 2 :</label>
-               <!--  <div class="controls">
-                   <div class="inpv"></div><br>
-                   <Button class="btn btn-info" id="advar">Buat Varian</Button> <Button class="btn btn-info" id="bvar">Tambah Varian</Button><br><br> 
-                </div>            --> 
-                
-
                 <div class="controls" id="aktivkanvariasidua">
                 <button type="button" id="btnvairasidua" class="btn btn-success add-on">Aktivkan</button>
                 </div>
@@ -154,6 +157,7 @@
                     <hr>
                 <table class="table table-bordered table-striped" id="listvariasi2">
               <thead>
+                
                 <tr>
                   <th id="tnamavariasisatu2">variasi 1</th>
                   <th id="tnamavariasidua">variasi 2</th>
@@ -206,57 +210,4 @@
 
         @section('js')
      <script src="{{asset('assets/js/page/tambahbarang.js')}}"></script>
-     <!-- <script>
-        $('document').ready(function(){     
-          var b=false;
-          var dr=0;
-          var dv=0; 
-          $('#adtr').hide();
-          $('#bvar').hide()
-          $('#adtb').click(function(){       
-              b=false;   
-              dr=dr+1;                      
-              // add input
-              $('.inp').append('Nama : <input class="hname" type="text"><br><br> Pilihan : <input type="text" class="inpnm"><br>');
-              // tabel
-              $('tb').append('<table class="table table-bordered table-striped" id="tabel" border="1"><thead><tr class="tvar"><th id="name">Nama</th><th class="var">varian 2</th><th>Stok</th><th>Harga</th><th>Kode</th></tr></thead></table>');             
-              $('#tabel').append('<tr><td>bar</td><td id="iv'+dr+'"  class="vari"><vr></vr></td><td>Stok</td><td>Harga</td><td>Kode</td></tr>');         
-              $('.var').hide();   
-              $('.vari').hide();                
-              $('#adtb').hide();
-              $('#adtr').show();
-          });
-          $('#adtr').click(function(){                    
-              dr=dr+1;    
-              if(b==true){
-                  $('#tabel').append('<tr><td>bar</td><td id="iv'+dr+'" class="vari"><vr></vr></td><td>Stok</td><td>Harga</td><td>Kode</td></tr>');
-                  $('.inp').append('<div class="control-group">Pilihan : <input type="text" class="inpnm"></div>');                        
-                  $('.vari').show();
-                  for(var i=0; i<dv;i++){
-                      $('#inpnmv'+dv).clone().appendTo('#iv'+dr);
-                  }
-              }else{ 
-                  $('#tabel').append('<tr><td>bar</td><td id="iv'+dr+'" class="vari"><vr></vr></td><td>Stok</td><td>Harga</td><td>Kode</td></tr>');
-                  $('.inp').append('<div class="control-group">Pilihan : <input type="text" class="inpnm"></div>');    
-                  $('.vari').hide();
-              }
-          });
-          $('#advar').click(function(){
-              b=true;
-              dv=dv+1;
-              $('.var').show();
-              $('#bvar').show()
-              $('.vari').show();
-              $('.inpv').append('<div class="control-group">Nama : <input id="hnamev"  type="text"><br><br> Pilihan : <input id="inpnmv'+dv+'" type="text" class="ipnv"></div>');
-              $('.vari').append('<div class="control-group"> <input class="ipnv" type="text"  id="inpnmv'+dv+'"></div>');
-              $('#advar').hide();
-          });     
-          $("#bvar").click(function(){
-                dv=dv+1;
-                $('.inpv').append('<div class="control-group"> Pilihan : <input class="ipnv" type="text"  id="inpnmv'+dv+'"></div>');
-                // Loop Unutk Input
-                 $('.vari').append('<input class="ipnv" type="text"  id="inpnmv'+dv+'"><br>');
-            }); 
-        });
-    </script> -->
 @endsection

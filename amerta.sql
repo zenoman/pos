@@ -198,6 +198,22 @@ INSERT INTO `tb_kategori` (`id`, `kategori`, `gambar`) VALUES
 	(2, 'baju cewek', '1563502050-ff.jpg');
 /*!40000 ALTER TABLE `tb_kategori` ENABLE KEYS */;
 
+-- Dumping structure for table amerta.tb_kodebarang
+DROP TABLE IF EXISTS `tb_kodebarang`;
+CREATE TABLE IF NOT EXISTS `tb_kodebarang` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_asli` varchar(50) DEFAULT NULL,
+  `kode` varchar(50) DEFAULT NULL,
+  `nama` varchar(200) DEFAULT NULL,
+  `status` enum('Y','N') DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table amerta.tb_kodebarang: ~0 rows (approximately)
+DELETE FROM `tb_kodebarang`;
+/*!40000 ALTER TABLE `tb_kodebarang` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_kodebarang` ENABLE KEYS */;
+
 -- Dumping structure for table amerta.tb_merk
 DROP TABLE IF EXISTS `tb_merk`;
 CREATE TABLE IF NOT EXISTS `tb_merk` (
@@ -205,9 +221,9 @@ CREATE TABLE IF NOT EXISTS `tb_merk` (
   `nama` varchar(50) DEFAULT NULL,
   `gambar` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table amerta.tb_merk: ~1 rows (approximately)
+-- Dumping data for table amerta.tb_merk: ~0 rows (approximately)
 DELETE FROM `tb_merk`;
 /*!40000 ALTER TABLE `tb_merk` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tb_merk` ENABLE KEYS */;

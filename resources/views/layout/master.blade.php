@@ -11,26 +11,15 @@
 		<link rel="stylesheet" href="{{asset('assets/css/maruti-media.css')}}" class="skin-color" />	
 	</head>
 	<body>
-		
-		
-<!--Header-part-->
 <div id="header">
   <h1><a href="#">AMARTA LINK</a></h1>
 </div>
-<!--close-Header-part--> 
-
-<!--top-Header-messaages-->
-<!-- <div class="btn-group rightzero"> <a class="top_message tip-left" title="Manage Files"><i class="icon-file"></i></a> <a class="top_message tip-bottom" title="Manage Users"><i class="icon-user"></i></a> <a class="top_message tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a> <a class="top_message tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a> </div> -->
-<!--close-top-Header-messaages--> 
-
-<!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse"><ul class="nav">
     
     <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-user"></i> <span class="text">{{ Auth::user()->name }}</span> <b class="caret"></b></a>
       <ul class="dropdown-menu text-left">
         <li><a class="sInbox" title="" href="{{url('admin/'.Auth::user()->id)}}">Edit Profile</a></li>
         <li>
-        <!--   <a class="sAdd" title="" href="#">Logout</a> -->
            <a class="sAdd" title="" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
