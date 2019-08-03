@@ -110,7 +110,7 @@
                 <div class="controls" style="display: none;" id="aksesvariasidua">
                   <input type="text" class="span5" id="namavariasidua" placeholder="Nama variasi, contoh (warna ,ukuran ,size)">
                   <input type="text" class="span5" id="variasidua1" onchange="variasidua(1)">
-                  <button type="button" id="addinputdua" class="btn btn-primary add-on" onClick="addInputdua('dynamicInput2');">Tambah</button>
+                  <button type="button" id="addinputdua" class="btn btn-primary add-on" onClick="addInputdua('dynamicInput2');">Tambah</button> <button type="button" id="hapusvariasidua" class="btn btn-warning add-on">Nonaktiv</button>
                 </div>
               </div>
                <div id="dynamicInput2">
@@ -129,9 +129,7 @@
               </thead>
               <tbody>
                 <tr>
-                  
                   <td style="text-align: center;" id="tvariasisatu1"></td>
-                  
                   <td style="text-align: center;">Row 3</td>
                   <td style="text-align: center;">Row 4</td>
                 </tr>
@@ -145,18 +143,17 @@
                 <table class="table table-bordered table-striped" id="listvariasi2">
               <thead>
                 <tr>
-                  
                   <th id="tnamavariasisatu2">variasi 1</th>
-                 <th id="tnamavariasidua">variasi 2</th>
+                  <th id="tnamavariasidua">variasi 2</th>
                   <th>Harga</th>
                   <th>Stok</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr class="parentnya tr1">
                   
-                  <td style="text-align: center;" id="tvariasisatu21" class="v1"></td>
-                  <td style="text-align: center;"><span style="color:grey">Kosong</span></td>
+                  <td style="text-align: center;" id="tvariasisatu21" class="v1"><span style="color:grey">Kosong</span></td>
+                  <td style="text-align: center;" class="tvariasidua21"><span style="color:grey">Kosong</span></td>
                   <td style="text-align: center;">Row 3</td>
                   <td style="text-align: center;">Row 4</td>
                 </tr>
@@ -186,20 +183,6 @@
               </div>
             </div>
           </div>
-                <!-- <div class="span3">
-              <div class="widget-box">
-              <div class="widget-title">
-               
-                <h5>Navigation</h5>
-              </div>
-              <div class="widget-content">
-               <a href="#informasi-produk" class="btn btn-primary btn-block">Informasi Produk</a>
-               <a href="#informasi-penjualan" class="btn btn-primary btn-block">Informasi Penjualan</a>
-               <a href="#informasi-produk" class="btn btn-primary btn-block">Pengaturan Media</a>
-              </div>
-            </div>
-            
-          </div> -->
               </div>
           </div>
         </div>

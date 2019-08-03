@@ -31,24 +31,23 @@ function addInputdua(divName){
  }
  else {
     var newdiv = document.createElement('div');
-    newdiv.innerHTML ='<div class="control-group" id="input'+counterdua+'">'+
+    newdiv.innerHTML ='<div class="control-group inputdua" id="inputdua'+counterdua+'">'+
                 '<label class="control-label">&nbsp;&nbsp;</label>'+
                 '<div class="controls">'+
                 '<span class="span5"></span>'+
-                  '<input type="text" class="span5" id="variasisatu'+counterdua+'" onchange="variasisatu('+counter+')">'+
-                  '<button type="button" class="btn btn-danger add-on" onclick="del('+counter+')">Hapus</button>'+
+                  '<input type="text" class="span5" id="variasidua'+counterdua+'" onchange="variasidua('+counterdua+')">'+
+                  '<button type="button" class="btn btn-danger add-on" onclick="deldua('+counterdua+')">Hapus</button>'+
                 '</div>'+
-              '</div>';;
-   $('#listvariasi2 tr:last').after('<tr>'+
-                  
-                  '<td style="text-align: center;" id="tvariasisatu2'+counterdua+'" class="v1"><span style="color:grey">Kosong</span></td>'+
-                   '<td style="text-align: center;"><span style="color:grey">Kosong</span></td>'+
-                  '<td style="text-align: center;">Row 3</td>'+
-                  '<td style="text-align: center;">Row 4</td>'+
-                '</tr>');
-  
-    document.getElementById(divName).appendChild(newdiv);
-    counter++;
+              '</div>';
+   $('.parentnya').after(
+                  '<tr class="trdua'+counterdua+' tr'+counter+'">'+
+                  '<td> </td>'+
+                  '<td style="text-align: center;" class="tvariasidua2'+counterdua+'"><span style="color:grey">Kosong</span></td>'+
+                  '<td style="text-align: center;">-</td>'+
+                  '<td style="text-align: center;">-</td>'+
+                  '</tr>');
+  document.getElementById(divName).appendChild(newdiv);
+    counterdua++;
  }
 }
 window.addInputdua=addInputdua;
@@ -68,7 +67,7 @@ function addInput(divName){
                   '<input type="text" class="span5" id="variasisatu'+counter+'" onchange="variasisatu('+counter+')">'+
                   '<button type="button" class="btn btn-danger add-on" onclick="del('+counter+')">Hapus</button>'+
                 '</div>'+
-              '</div>';;
+              '</div>';
     $('#listvariasi tr:last').after('<tr>'+
                   
                   '<td style="text-align: center;" id="tvariasisatu'+counter+'"><span style="color:grey">Kosong</span></td>'+
@@ -76,10 +75,10 @@ function addInput(divName){
                   '<td style="text-align: center;">Row 3</td>'+
                   '<td style="text-align: center;">Row 4</td>'+
                 '</tr>');
-     $('#listvariasi2 tr:last').after('<tr>'+
+     $('#listvariasi2 tr:last').after('<tr class="parentnya tr'+counter+'">'+
                   
-                  '<td style="text-align: center;" colspan="0"  id="tvariasisatu2'+counter+'"><span style="color:grey">Kosong</span></td>'+
-                   '<td style="text-align: center;"><span style="color:grey">Kosong</span></td>'+
+                  '<td style="text-align: center;" colspan="0" id="tvariasisatu2'+counter+'"><span style="color:grey">Kosong</span></td>'+
+                   '<td style="text-align: center;" class="tvariasidua21"><span style="color:grey">Kosong</span></td>'+
                   '<td style="text-align: center;">Row 3</td>'+
                   '<td style="text-align: center;">Row 4</td>'+
                 '</tr>');
@@ -94,7 +93,7 @@ window.addInput=addInput;
 function del(no) {
   document.getElementById('input'+no).remove();
   $('#listvariasi tr:last').remove();
-   $('#listvariasi2 tr:last').remove();
+   $('.tr'+no).remove();
   counter = counter - 1;
   for(i=no;i<=limit;i++){
     var id = document.getElementById('input'+i);
@@ -106,7 +105,21 @@ function del(no) {
   }
 }
 window.del=del;
+//=====================================================================
+function deldua(no) {
+  document.getElementById('inputdua'+no).remove();
+  $('.trdua'+no).remove();
+  counter = counter - 1;
+  for(i=no;i<=limit;i++){
+    var id = document.getElementById('input'+i);
+    if (id === null){
 
+    } else {
+
+    }
+  }
+}
+window.deldua=deldua;
 //tampil tombol variasi 1
 //=====================================================================
 $("#variasisatu1").keydown( function(e){
@@ -138,13 +151,35 @@ $("#variasisatu1").keydown( function(e){
 //tampil tombol variasi 1
 //=====================================================================
 $("#namavariasidua").keydown( function(e){
-	if($('#variasisatu1').val()!=''){
+	if($('#namavariasidua').val()!=''){
 		$('#tnamavariasidua').html($('#namavariasidua').val());
 	}else{
 		$('#tnamavariasidua').html('variasi 2');
 	}
 
 });
+//====================================================
+function variasidua(nomer){
+  if(nomer==1){
+    if($('#variasidua'+nomer).val()==''){
+      //$('#addinputdua').hide();
+      $('#tabelvariasi').show();
+      $('#tabelvariasi2').hide();
+    }else{
+      $('#tabelvariasi').hide();
+      $('#tabelvariasi2').show();
+      $('#tvariasisatu'+nomer).html($('#variasisatu'+nomer).val());
+      $('#tvariasisatu2'+nomer).html($('#variasisatu'+nomer).val());
+      $('.tvariasidua2'+nomer).html($('#variasidua'+nomer).val());
+    }
+      
+  }else{
+    $('#tvariasisatu'+nomer).html($('#variasisatu'+nomer).val());
+    $('.tvariasidua2'+nomer).html($('#variasidua'+nomer).val());
+  }
+  
+}
+window.variasidua=variasidua;
 //====================================================
 function variasisatu(nomer){
 	if(nomer==1){
@@ -173,3 +208,13 @@ $('#btnvairasidua').click(function(){
 	$('#tabelvariasi2').show();
  });
  });
+
+//=====================================
+$('#hapusvariasidua').click(function(){
+gunakanvariasi = 'N';
+  $('#aksesvariasidua').hide();
+  $('#aktivkanvariasidua').show();
+  $('#tabelvariasi').show();
+  $('#tabelvariasi2').hide();
+  $('.inputdua').remove();
+});
