@@ -92,44 +92,44 @@
                 <div class="form-horizontal">
                   <div class="control-group">
                 <label class="control-label">Variasi 1 :</label>
-                {{-- <div class="controls">
+                <div class="controls">
                   <input type="text" class="span5" id="namavariasisatu" placeholder="Nama variasi, contoh (warna ,ukuran ,size)">
                   <input type="text" class="span5" id="variasisatu1" onchange="variasisatu(1)">
                   <button type="button" id="addinput" class="btn btn-primary add-on" onClick="addInput('dynamicInput');" style="display: none;">Tambah</button>
-                </div> --}}
+                </div>
 
-                <Button id="adtb" class="btn btn-primary">Aktifkan Variasi 1</Button>
-                <div class="controls">
+               <!--  <Button id="adtb" class="btn btn-primary">Aktifkan Variasi 1</Button> -->
+              <!--   <div class="controls">
                     <div class="inp"></div><br>
                     <Button class="btn btn-info" id="adtr">Tambah Row</Button>
-                </div>                
+                </div>  -->               
               </div>
-              {{-- <div id="dynamicInput">
-              </div> --}}
+              <div id="dynamicInput">
+              </div> 
 
               <div class="control-group">
                 <label class="control-label">Variasi 2 :</label>
-                <div class="controls">
+               <!--  <div class="controls">
                    <div class="inpv"></div><br>
                    <Button class="btn btn-info" id="advar">Buat Varian</Button> <Button class="btn btn-info" id="bvar">Tambah Varian</Button><br><br> 
-                </div>            
+                </div>            --> 
                 
 
-                {{-- <div class="controls" id="aktivkanvariasidua">
+                <div class="controls" id="aktivkanvariasidua">
                 <button type="button" id="btnvairasidua" class="btn btn-success add-on">Aktivkan</button>
                 </div>
                 <div class="controls" style="display: none;" id="aksesvariasidua">
                   <input type="text" class="span5" id="namavariasidua" placeholder="Nama variasi, contoh (warna ,ukuran ,size)">
                   <input type="text" class="span5" id="variasidua1" onchange="variasidua(1)">
                   <button type="button" id="addinputdua" class="btn btn-primary add-on" onClick="addInputdua('dynamicInput2');">Tambah</button> <button type="button" id="hapusvariasidua" class="btn btn-warning add-on">Nonaktiv</button>
-                </div> --}}
+                </div>
               </div>
-               {{-- <div id="dynamicInput2">
-            </div> --}}
-                {{-- </div>
+                <div id="dynamicInput2">
+            </div>
+             </div>
                 <div id="tabelvariasi" style="display: none;">
-                    <hr> --}}
-            {{-- <table class="table table-bordered table-striped" id="listvariasi">
+                    <hr> 
+                     <table class="table table-bordered table-striped" id="listvariasi">
               <thead>
                 <tr>
                   
@@ -145,9 +145,9 @@
                   <td style="text-align: center;">Row 4</td>
                 </tr>
               </tbody>
-            </table> --}}
-            <tb></tb>
-                {{-- </div>
+            </table> 
+           <!--  <tb></tb> -->
+          </div>
 
 
               <div id="tabelvariasi2" style="display: none;">
@@ -171,7 +171,7 @@
                 </tr>
               </tbody>
             </table>
-                </div>--}}
+                </div>
               </div> 
             </div>
             <div class="widget-box" id="informasi-produk">
@@ -206,7 +206,7 @@
 
         @section('js')
      <script src="{{asset('assets/js/page/tambahbarang.js')}}"></script>
-     <script>
+     <!-- <script>
         $('document').ready(function(){     
           var b=false;
           var dr=0;
@@ -258,5 +258,5 @@
                  $('.vari').append('<input class="ipnv" type="text"  id="inpnmv'+dv+'"><br>');
             }); 
         });
-    </script>
+    </script> -->
 @endsection
