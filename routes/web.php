@@ -47,6 +47,7 @@ Route::resource('setting','admin\settingcontroller');
 //barang
 Route::resource('barang','admin\barangcontroller');
 Route::get('import-barang','admin\barangcontroller@import');
+Route::get('/carisubkategori/{id}','admin\barangcontroller@carisubkategori');
 Auth::routes();
 
 //merk

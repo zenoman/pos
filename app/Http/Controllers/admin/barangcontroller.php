@@ -47,66 +47,19 @@ class barangcontroller extends Controller
                 $finalkode      = $tanggal."-".$kodeuser."-".$nomer;
                 $finalkodenew   = $newhari."".$newbulan."".$newtahun."".$kodeuser."-".$nomer;
             }
-        return view('barang/create',['kode'=>$finalkode,'newkode'=>$finalkodenew]);
+        $kategori = DB::table('tb_kategori')->orderby('id','desc')->get();
+        $subkategori = DB::table('tb_sub_kategori')->orderby('id','desc')->get();
+        $merk = DB::table('tb_merk')->orderby('id','desc')->get();
+        return view('barang/create',['kode'=>$finalkode,'newkode'=>$finalkodenew,'kategori'=>$kategori,'subkategori'=>$subkategori,'merk'=>$merk]);
     }
 
     //==========================================
     public function import(){
         return view('barang/import');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    //============================================
+    public function carisubkategori($id){
+        $data = DB::table('tb_sub_kategori')->where('id_kategori',$id)->get();
+        return response()->json($data);
     }
 }

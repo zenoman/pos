@@ -6,7 +6,7 @@
         <div id="breadcrumb">
         
       </div>
-                <h1>Data Barang</h1>
+       <h1>Data Barang</h1>
       </div>
       
     <div class="container-fluid">
@@ -57,15 +57,14 @@
               <div class="control-group">
                 <label class="control-label">Kategori & sub Kategori :</label>
                 <div class="controls">
-                  <select name="halo" id="" class="span5">
-                    <option value="">halo</option>
-                    <option value="">halo</option>
-                    <option value="">halo</option>
+                  <select name="kategori" id="kategori" class="span5">
+                    <option selected disabled hidden>pilih kategori</option>
+                    @foreach($kategori as $kat)
+                    <option value="{{$kat->id}}">{{$kat->kategori}}</option>
+                    @endforeach
                   </select>
-                  <select name="halo" id="" class="span6">
-                    <option value="">halo</option>
-                    <option value="">halo</option>
-                    <option value="">halo</option>
+                  <select name="subkategori" id="subkategori" class="span6">
+                    <option selected disabled hidden>pilih Sub kategori</option>
                   </select>
                 </div>
               </div>
@@ -73,9 +72,9 @@
                 <label class="control-label">Merk :</label>
                 <div class="controls">
                   <select name="halo" id="" class="span11">
-                    <option value="">halo</option>
-                    <option value="">halo</option>
-                    <option value="">halo</option>
+                    @foreach($merk as $mrk)
+                    <option value="{{$mrk->id}}">{{$mrk->nama}}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
