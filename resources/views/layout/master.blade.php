@@ -8,7 +8,8 @@
 		<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
 		<link rel="stylesheet" href="{{asset('assets/css/bootstrap-responsive.min.css')}}" />
 		<link rel="stylesheet" href="{{asset('assets/css/maruti-style.css')}}" />
-		<link rel="stylesheet" href="{{asset('assets/css/maruti-media.css')}}" class="skin-color" />	
+		<link rel="stylesheet" href="{{asset('assets/css/maruti-media.css')}}" class="skin-color"/>
+  @yield('css')	
 	</head>
 	<body>
 <div id="header">

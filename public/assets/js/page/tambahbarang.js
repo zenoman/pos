@@ -5,10 +5,17 @@ $(document).ready(function() {
     var limitdua = 10; // limit
     var counter = 2; //variabel nomor inputan
     var limit = 10; // limit
-
+    var novariasisatu = [1,];
+    var novariasidua = [1,];
+    var realnomer = 0;
     $('#addinput').hide()
-    $('#tabelvariasi').hide();
+
     //fungsi remove html
+
+    function hapustr(no){
+      $('.realtd'+no).remove();
+    }
+    window.hapustr=hapustr;
     //====================================================
     Element.prototype.remove = function() {
         this.parentElement.removeChild(this);
@@ -39,27 +46,23 @@ $(document).ready(function() {
                       '<button type="button" class="btn btn-danger add-on" onclick="deldua('+counterdua+')">Hapus</button>'+
                     '</div>'+
                   '</div>';
-       $('.parentnya').after(
-                      '<tr class="trdua'+counterdua+' tr'+counter+'">'+
-                      '<td> </td>'+
-                      '<td style="text-align: center;" class="tvariasidua2'+counterdua+'"><span style="color:grey">Kosong</span></td>'+
-                      '<td style="text-align: center;">-</td>'+
-                      '<td style="text-align: center;">-</td>'+
-                      '</tr>');
       document.getElementById(divName).appendChild(newdiv);
+        novariasidua.push(counterdua);
         counterdua++;
+        managerow();
      }
     }
     window.addInputdua=addInputdua;
 
     //fungsi tambah input
-    function addInput(divName){
-
+    function addInput(){
+      var divName = 'dynamicInput';
      if (counter == limit)  {
         alert("Limit hanya " + counter + " inputan");
      }
-     else {
-        var newdiv = document.createElement('div');
+     else{
+      var newdiv = document.createElement('div');
+      novariasisatu.push(counter);
         newdiv.innerHTML ='<div class="control-group" id="input'+counter+'">'+
                     '<label class="control-label">&nbsp;&nbsp;</label>'+
                     '<div class="controls">'+
@@ -68,22 +71,9 @@ $(document).ready(function() {
                       '<button type="button" class="btn btn-danger add-on" onclick="del('+counter+')">Hapus</button>'+
                     '</div>'+
                   '</div>';
-        $('#listvariasi tr:last').after('<tr>'+
-                      
-                      '<td style="text-align: center;" id="tvariasisatu'+counter+'"><span style="color:grey">Kosong</span></td>'+
-                      
-                      '<td style="text-align: center;">Row 3</td>'+
-                      '<td style="text-align: center;">Row 4</td>'+
-                    '</tr>');
-         $('#listvariasi2 tr:last').after('<tr class="parentnya tr'+counter+'">'+
-                      
-                      '<td style="text-align: center;" colspan="0" id="tvariasisatu2'+counter+'"><span style="color:grey">Kosong</span></td>'+
-                       '<td style="text-align: center;" class="tvariasidua21"><span style="color:grey">Kosong</span></td>'+
-                      '<td style="text-align: center;">Row 3</td>'+
-                      '<td style="text-align: center;">Row 4</td>'+
-                    '</tr>');
         document.getElementById(divName).appendChild(newdiv);
         counter++;
+        managerow();
      }
     }
     window.addInput=addInput;
@@ -92,62 +82,91 @@ $(document).ready(function() {
     //=====================================================================
     function del(no) {
       document.getElementById('input'+no).remove();
-      $('#listvariasi tr:last').remove();
-       $('.tr'+no).remove();
+      $('.tr'+no).remove();
       counter = counter - 1;
+      novariasisatu = jQuery.grep(novariasisatu,function(value){
+        return value != no;
+      });
       for(i=no;i<=limit;i++){
         var id = document.getElementById('input'+i);
-        if (id === null){
-
-        } else {
-
-        }
       }
+      // alert(novariasisatu);
     }
     window.del=del;
     //=====================================================================
     function deldua(no) {
       document.getElementById('inputdua'+no).remove();
-      $('.trdua'+no).remove();
-      counter = counter - 1;
-      for(i=no;i<=limit;i++){
-        var id = document.getElementById('input'+i);
-        if (id === null){
-
-        } else {
-
-        }
-      }
+    $('.td'+no).remove();
+      counterdua = counterdua - 1;
+    novariasidua = jQuery.grep(novariasidua,function(value){
+        return value != no;
+      });
     }
     window.deldua=deldua;
     //tampil tombol variasi 1
     //=====================================================================
     $("#variasisatu1").keydown( function(e){
-    	if($('#variasisatu1').val()!=''){
-    		if(gunakanvariasi=='N'){
-    			$('#tabelvariasi').show();
-    			$('#tabelvariasi2').hide();
-    		}else{
-    			$('#tabelvariasi').hide();
-    			$('#tabelvariasi2').show();
-    		}
-    		$('#addinput').show();
-    		
-    		//tabel 1 variasi
-    		$('#tvariasisatu1').html($('#variasisatu1').val());
-    		$('#tnamavariasisatu').html($('#namavariasisatu').val());
-
-    		//tabel 2 variasi
-    		$('#tvariasisatu21').html($('#variasisatu21').val());
-    		$('#tnamavariasisatu2').html($('#namavariasisatu').val());
-    	}else{
-    		$('#addinput').hide();
-    		$('#tabelvariasi').hide();
-    		$('#tabelvariasi2').hide();
-    	}
+    	if($('#variasisatu1').val()==''){
+         $('#addinput').hide();
+        $('#tabelvariasi').hide();
+        managerow();
+      }else{
+        $('#addinput').show();
+        $('#tabelvariasi').show();
+        managerow();
+      }
 
     });
+    //================================================================
+    function managerow(){
+      realnomer = 0;
+      $('#listnya').html('');
+      var variasisatu = '';
+      if(gunakanvariasi=='Y'){
+         $.each(novariasisatu,function(index,value){
+          if ($('#variasisatu'+value).val()==''){
+            var isi = '<span class="text-muted">Kosong</span>';
+          }else{
+            var isi = $('#variasisatu'+value).val();
+          }
+            $.each(novariasidua,function(index,valuedua){
+              realnomer++;
 
+               if ($('#variasidua'+valuedua).val()=='') {
+                  var isidua = '<span class="text-muted">Kosong</span>';
+                }else{
+                  var isidua = $('#variasidua'+valuedua).val();
+                }
+             variasisatu = variasisatu + '<tr class="tr'+value+' td'+valuedua+' realtd'+realnomer+'">'+
+                  '<td style="text-align: center;" class="row'+value+'">'+isi+'</td>'+
+                  '<td style="text-align: center;" class="isivariasidua roww'+valuedua+'">'+isidua+'</td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="harga[]" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="stok[]" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><button class="btn btn-danger" onclick="hapustr('+realnomer+')"><i class="icon icon-remove"></i></button></td>'+
+                  '</tr>';
+            });
+        });
+      }else{
+        $.each(novariasisatu,function(index,value){
+          if ($('#variasisatu'+value).val()==''){
+            var isi = '<span class="text-muted">Kosong</span>';
+          }else{
+            var isi = $('#variasisatu'+value).val();
+          }
+       variasisatu = variasisatu + '<tr class="tr'+value+'">'+
+                  '<td style="text-align: center;" class="row'+value+'">'+isi+'</td>'+
+                  '<td style="text-align: center;" class="isivariasidua roww1"><span style="color:grey">Kosong</span></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="harga[]" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="stok[]" style="width:90%;"></td>'+
+                  '<td style="text-align: center;">-</td>'+
+                '</tr>';
+        });
+      }
+      
+
+      $('#listnya').html(variasisatu);
+    
+    }
     //tampil tombol variasi 1
     //=====================================================================
     $("#namavariasidua").keydown( function(e){
@@ -158,44 +177,24 @@ $(document).ready(function() {
     	}
 
     });
+    //=====================================================================
+    $("#namavariasisatu").keydown( function(e){
+      if($('#namavariasisatu').val()!=''){
+        $('#tnamavariasisatu').html($('#namavariasisatu').val());
+      }else{
+        $('#tnamavariasisatu').html('variasi 1');
+      }
+
+    });
     //====================================================
     function variasidua(nomer){
-      if(nomer==1){
-        if($('#variasidua'+nomer).val()==''){
-          //$('#addinputdua').hide();
-          $('#tabelvariasi').show();
-          $('#tabelvariasi2').hide();
-        }else{
-          $('#tabelvariasi').hide();
-          $('#tabelvariasi2').show();
-          $('#tvariasisatu'+nomer).html($('#variasisatu'+nomer).val());
-          $('#tvariasisatu2'+nomer).html($('#variasisatu'+nomer).val());
-          $('.tvariasidua2'+nomer).html($('#variasidua'+nomer).val());
-        }
-          
-      }else{
-        $('#tvariasisatu'+nomer).html($('#variasisatu'+nomer).val());
-        $('.tvariasidua2'+nomer).html($('#variasidua'+nomer).val());
-      }
+     $('.roww'+nomer).html($('#variasidua'+nomer).val());
       
     }
     window.variasidua=variasidua;
     //====================================================
     function variasisatu(nomer){
-    	if(nomer==1){
-    		if($('#variasisatu'+nomer).val()==''){
-    			$('#addinput').hide();
-    			$('#tabelvariasi').hide();
-    			$('#tabelvariasi2').hide();
-    		}else{
-    			$('#tvariasisatu'+nomer).html($('#variasisatu'+nomer).val());
-    			$('#tvariasisatu2'+nomer).html($('#variasisatu'+nomer).val());
-    		}
-    			
-    	}else{
-    		$('#tvariasisatu'+nomer).html($('#variasisatu'+nomer).val());
-    		$('#tvariasisatu2'+nomer).html($('#variasisatu'+nomer).val());
-    	}
+    $('.row'+nomer).html($('#variasisatu'+nomer).val());
     	
     }
     window.variasisatu=variasisatu;
@@ -203,21 +202,26 @@ $(document).ready(function() {
     $('#btnvairasidua').click(function(){
     	gunakanvariasi = 'Y';
     	$('#aksesvariasidua').show();
+      $('#rowinputdua').show();
     	$('#aktivkanvariasidua').hide();
-    	$('#tabelvariasi').hide();
-    	$('#tabelvariasi2').show();
+      managerow();
      });
     //=====================================
     $('#hapusvariasidua').click(function(){
     gunakanvariasi = 'N';
       $('#aksesvariasidua').hide();
       $('#aktivkanvariasidua').show();
-      $('#tabelvariasi').show();
-      $('#tabelvariasi2').hide();
+      $('#rowinputdua').hide();
+      $('.isivariasidua').html('kosong');
+      $('#tnamavariasidua').html('variasi 2');
+      $('#variasidua1').val('');
+      $('#namavariasidua').val('');
       $('.inputdua').remove();
+      managerow();
     });
     //=========================================
     $('#kategori').change(function(){
+      $('#panelnya').loading('toggle');
       var kategori = $(this).val();
       $.ajax({
         type:'GET',
@@ -232,9 +236,13 @@ $(document).ready(function() {
          $("#subkategori").append(rows);
         },error:function(){
                         alert('error');
-        }
+        },complete:function(){
+                
+                $('#panelnya').loading('stop');
+             }
       });
     });
+
 });
 
 
