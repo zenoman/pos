@@ -3,6 +3,12 @@
 <link href="{{asset('assets/js/loading.css')}}" rel="stylesheet">
 @endsection
 @section('content')
+<style>
+  .img {
+  height: 100px;
+  display: block;
+}
+</style>
 <div id="content">
       <div id="content-header">
         <div id="breadcrumb">
@@ -15,6 +21,7 @@
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box" id="panelnya">
+          <form action="{{url('barang')}}" method="post" enctype="multipart/form-data">
           <div class="widget-title"> <span class="icon"> <i class="icon-plus"></i> </span>
             <h5>Tambah Data Barang</h5>
           </div>
@@ -31,13 +38,6 @@
               <div class="widget-content">
                 <div class="form-horizontal">
                   <div class="control-group">
-                    
-                <label class="control-label">&nbsp;</label>
-                <div class="controls">
-                  {!! QrCode::size(200)->generate($newkode); !!}
-                </div>
-              </div>
-                  <div class="control-group">
                 <label class="control-label">Kode Produk :</label>
                 <div class="controls">
                   <input type="text" class="span11" name="newkode" id="newkode" readonly value="{{$newkode}}">
@@ -47,13 +47,13 @@
                   <div class="control-group">
                 <label class="control-label">Nama Produk :</label>
                 <div class="controls">
-                  <input type="text" class="span11">
+                  <input type="text" name="nama" class="span11" required>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Deskripsi Produk :</label>
                 <div class="controls">
-                  <textarea name="" class="span11" rows="3"></textarea>
+                  <textarea name="deskripsi" class="span11" rows="3"></textarea>
                 </div>
               </div>
               <div class="control-group">
@@ -73,7 +73,7 @@
               <div class="control-group">
                 <label class="control-label">Merk :</label>
                 <div class="controls">
-                  <select name="halo" id="" class="span11">
+                  <select name="merk" class="span11">
                     @foreach($merk as $mrk)
                     <option value="{{$mrk->id}}">{{$mrk->nama}}</option>
                     @endforeach
@@ -83,15 +83,16 @@
                <div class="control-group">
                 <label class="control-label">Asal Produk :</label>
                 <div class="controls">
-                  <input type="text" class="span11">
+                  <input type="text" name="asal" class="span11">
                 </div>
               </div>
                <div class="control-group">
                 <label class="control-label">Bahan :</label>
                 <div class="controls">
-                  <input type="text" class="span11">
+                  <input type="text" name="bahan" class="span11">
                 </div>
               </div>
+
                 </div>
                 
               </div>
@@ -108,8 +109,8 @@
                   <div class="control-group">
                 <label class="control-label">Variasi 1 :</label>
                 <div class="controls">
-                  <input type="text" class="span5" id="namavariasisatu" placeholder="Nama variasi, contoh (warna ,ukuran ,size)">
-                  <input type="text" class="span5" id="variasisatu1" onchange="variasisatu(1)">
+                  <input type="text" class="span5" id="namavariasisatu" placeholder="Nama variasi, contoh (warna ,ukuran ,size)" name="namavariasi">
+                  <input type="text" class="span5" id="variasisatu1" onchange="variasisatu(1)" name="variasisatu[]">
                   
                 </div>
                
@@ -126,7 +127,7 @@
                   
                   
                 </div>
-               <br>
+               <br><br>
               </div> 
               
               <div class="control-group">
@@ -135,7 +136,7 @@
                 <button type="button" id="btnvairasidua" class="btn btn-success add-on">Aktivkan</button>
                 </div>
                 <div class="controls" style="display: none;" id="aksesvariasidua">
-                  <input type="text" class="span5" id="namavariasidua" placeholder="Nama variasi, contoh (warna ,ukuran ,size)">
+                  <input type="text" class="span5" id="namavariasidua" placeholder="Nama variasi, contoh (warna ,ukuran ,size)" name="namasubvariasi">
                   <input type="text" class="span5" id="variasidua1" onchange="variasidua(1)">
                   <button type="button" id="hapusvariasidua" class="btn btn-warning add-on">Nonaktiv</button>
                 </div>
@@ -152,8 +153,32 @@
                   
                   
                 </div>
+               <br><br>
+              </div>
+              <br>
+              <div id="hargaall" class="control-group" style="display: none;">
+                <div class="controls">
+                  <span class="span3">
+                    <label>Harga Beli</label>
+                    <input type="number" min="0" id="hball">
+                  </span>
+                  <span class="span3">
+                    <label>Harga Jual</label> 
+                    <input type="number" min="0" id="hjall">
+                  </span>
+                   <span class="span3">
+                    <label>Stok</label> 
+                    <input type="number" min="0" id="sall">
+                  </span>
+                  <span class="span3">
+                    <label>&nbsp;</label> 
+                    <button type="button" class="btn btn-success" id="stokall">Aplikasikan Untuk Semua Varian</button>
+                  </span>
+                  
+                  
+                </div>
                <br>
-              </div> 
+              </div>  
              </div>
 
               <div id="tabelvariasi" style="display: none;">
@@ -164,7 +189,8 @@
                 <tr>
                   <th id="tnamavariasisatu">variasi 1</th>
                   <th id="tnamavariasidua">variasi 2</th>
-                  <th>Harga</th>
+                  <th>Harga Beli</th>
+                  <th>Harga Jual</th>
                   <th>Stok</th>
                   <th>Aksi</th>
                 </tr>
@@ -185,12 +211,42 @@
               <div class="widget-content">
                 <div class="form-horizontal">
                   <div class="control-group">
-                <label class="control-label">Foto Produk :</label>
+                <label class="control-label">Foto Utama :</label>
                 <div class="controls">
-                  <input type="text" class="span11">
+                  <input type="file" id="upload" name="fotoutama" class="span11">
+                  <div id="tempatfoto">
+                    
+                  </div>
                 </div>
               </div>
              
+                </div>
+                
+              </div>
+              <div class="widget-content">
+                <div class="form-horizontal">
+                  <div class="control-group">
+                <label class="control-label">Foto Barang ke-1 :</label>
+                <div class="controls">
+                  <input type="file" id="fotobarang" name="fotobarang[]" class="span11 fto1" onchange="imgToDatabarang(this,1)">
+                  <div id="tempatfotobarang1">
+                  </div>
+                </div>
+              </div>
+                
+              <div id="dynamicInput3">
+            </div>
+                </div>
+                
+              </div>
+              <div class="widget-content">
+                <div class="form-horizontal">
+                  <div class="control-group">
+                <label class="control-label">&nbsp;</label>
+                <div class="controls">
+                  <button type="button" id="tambahfoto" class="btn btn-warning" onclick="addInputfoto()">Tambah Foto</button>
+                </div>
+              </div>
                 </div>
                 
               </div>
@@ -198,6 +254,7 @@
           </div>
               </div>
           </div>
+          </form>
         </div>
       </div>
     </div>

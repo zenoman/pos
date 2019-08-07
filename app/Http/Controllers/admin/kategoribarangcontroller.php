@@ -23,7 +23,7 @@ class kategoribarangcontroller extends Controller
 
         return redirect('kategori-barang')->with('status','Data Berhasil diubah');
     }
-    //===================================================================
+    //================================================================
     public function simpansubkategori(Request $request){
         DB::table('tb_sub_kategori')
         ->insert([
@@ -33,14 +33,14 @@ class kategoribarangcontroller extends Controller
         return redirect('kategori-barang')->with('status','Data berhasil disimpan');
     }
 
-    //=====================================================================
+    //================================================================
     public function hapussubkategori($id){
         DB::table('tb_sub_kategori')
         ->where('id',$id)
         ->delete();
         return redirect('kategori-barang')->with('status','Data berhasil dihapus');
     }
-    //=========================================================================
+    //================================================================
     public function index()
     {
         $websetting = DB::table('tb_setting')->limit(1)->get();

@@ -1,10 +1,12 @@
 $(document).ready(function() {
     //========================================
     var gunakanvariasi = 'N';
+    var counterfoto = 2;
     var counterdua = 2; //variabel nomor inputan
     var limitdua = 10; // limit
     var counter = 2; //variabel nomor inputan
-    var limit = 10; // limit
+    var limit = 10;
+    var limitfoto = 8; // limit
     var novariasisatu = [1,];
     var novariasidua = [1,];
     var realnomer = 0;
@@ -109,10 +111,15 @@ $(document).ready(function() {
     	if($('#variasisatu1').val()==''){
          $('#addinput').hide();
         $('#tabelvariasi').hide();
+        $('#hargaall').hide();
+        $('#hball').val('');
+        $('#hjall').val('');
+        $('#sall').val('');
         managerow();
       }else{
         $('#addinput').show();
         $('#tabelvariasi').show();
+        $('#hargaall').show();
         managerow();
       }
 
@@ -125,39 +132,41 @@ $(document).ready(function() {
       if(gunakanvariasi=='Y'){
          $.each(novariasisatu,function(index,value){
           if ($('#variasisatu'+value).val()==''){
-            var isi = '<span class="text-muted">Kosong</span>';
+            var isi = 'Kosong';
           }else{
             var isi = $('#variasisatu'+value).val();
           }
             $.each(novariasidua,function(index,valuedua){
               realnomer++;
 
-               if ($('#variasidua'+valuedua).val()=='') {
-                  var isidua = '<span class="text-muted">Kosong</span>';
+               if($('#variasidua'+valuedua).val()==''){
+                  var isidua = 'Kosong';
                 }else{
                   var isidua = $('#variasidua'+valuedua).val();
                 }
              variasisatu = variasisatu + '<tr class="tr'+value+' td'+valuedua+' realtd'+realnomer+'">'+
-                  '<td style="text-align: center;" class="row'+value+'">'+isi+'</td>'+
-                  '<td style="text-align: center;" class="isivariasidua roww'+valuedua+'">'+isidua+'</td>'+
-                  '<td style="text-align: center;"><input type="number" min="0" name="harga[]" style="width:90%;"></td>'+
-                  '<td style="text-align: center;"><input type="number" min="0" name="stok[]" style="width:90%;"></td>'+
-                  '<td style="text-align: center;"><button class="btn btn-danger" onclick="hapustr('+realnomer+')"><i class="icon icon-remove"></i></button></td>'+
+                  '<td style="text-align: center;" class="row'+value+'"><input type="text" name="variasisatu[]" class="row'+value+'" style="width:90%;" value="'+isi+'" readonly></td>'+
+                  '<td style="text-align: center;" class="isivariasidua"><input type="text" name="variasidua[]" class="roww'+valuedua+'" style="width:90%;" value="'+isidua+'" readonly></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="harga[]" class="hargabeli" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="hargajual[]" class="hargajual" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="stok[]" class="stoknya" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><button type="button" class="btn btn-danger" onclick="hapustr('+realnomer+')"><i class="icon icon-remove"></i></button></td>'+
                   '</tr>';
             });
         });
       }else{
         $.each(novariasisatu,function(index,value){
           if ($('#variasisatu'+value).val()==''){
-            var isi = '<span class="text-muted">Kosong</span>';
+            var isi = 'Kosong';
           }else{
             var isi = $('#variasisatu'+value).val();
           }
        variasisatu = variasisatu + '<tr class="tr'+value+'">'+
-                  '<td style="text-align: center;" class="row'+value+'">'+isi+'</td>'+
+                  '<td style="text-align: center;"><input type="text" name="variasisatu[]" class="row'+value+'" style="width:90%;" value="'+isi+'" readonly></td>'+
                   '<td style="text-align: center;" class="isivariasidua roww1"><span style="color:grey">Kosong</span></td>'+
-                  '<td style="text-align: center;"><input type="number" min="0" name="harga[]" style="width:90%;"></td>'+
-                  '<td style="text-align: center;"><input type="number" min="0" name="stok[]" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="harga[]" class="hargabeli" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="hargajual[]" class="hargajual" style="width:90%;"></td>'+
+                  '<td style="text-align: center;"><input type="number" min="0" name="stok[]" class="stoknya" style="width:90%;"></td>'+
                   '<td style="text-align: center;">-</td>'+
                 '</tr>';
         });
@@ -188,13 +197,13 @@ $(document).ready(function() {
     });
     //====================================================
     function variasidua(nomer){
-     $('.roww'+nomer).html($('#variasidua'+nomer).val());
+     $('.roww'+nomer).val($('#variasidua'+nomer).val());
       
     }
     window.variasidua=variasidua;
     //====================================================
     function variasisatu(nomer){
-    $('.row'+nomer).html($('#variasisatu'+nomer).val());
+    $('.row'+nomer).val($('#variasisatu'+nomer).val());
     	
     }
     window.variasisatu=variasisatu;
@@ -242,7 +251,95 @@ $(document).ready(function() {
              }
       });
     });
+    //==============================================
+    function imgToData(input) {
+    $('#tempatfoto').html('');
+    if (input.files) {
+      var length = input.files.length;
+        $.each(input.files, function(i, v) {
+            var n = i + 1;
+            var File = new FileReader();
+            var datafoto ='';
+            File.onload = function(event) {
+              datafoto = datafoto + '<span class="span3">'+
+              '<img src="'+event.target.result+'" width="100%"></span>';
+              $('#tempatfoto').append(datafoto);
+            };
 
+            File.readAsDataURL(input.files[i]);
+          });
+      }
+    }
+
+  //=============================================================
+  $('#upload').change(function(event) {
+    imgToData(this);
+  });
+
+  //==============================================================
+  function imgToDatabarang(input,no) {
+      $('#tempatfotobarang'+no).html('');
+    if (input.files) {
+
+      var length = input.files.length;
+        $.each(input.files, function(i, v) {
+            var n = i + 1;
+            var File = new FileReader();
+            var datafoto ='';
+            File.onload = function(event) {
+              datafoto = datafoto + '<span class="span3">'+
+              '<img src="'+event.target.result+'" width="100%"></span>';
+              $('#tempatfotobarang'+no).append(datafoto);
+            };
+
+            File.readAsDataURL(input.files[i]);
+          });}
+  }
+  window.imgToDatabarang = imgToDatabarang;
+   //====================================================
+
+
+    //fungsi tambah input
+    function addInputfoto(){
+      var divName ='dynamicInput3';
+     if (counterfoto == limitfoto)  {
+        alert("Limit hanya " + counterfoto + " inputan");
+     }
+     else {
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML ='<div class="control-group foto'+counterfoto+'">'+
+                '<label class="control-label">Foto Barang ke-'+counterfoto+' :</label>'+
+                '<div class="controls">'+
+                  '<input type="file" class="span11 fto1" name="fotobarang[]" onchange="imgToDatabarang(this,'+counterfoto+')">'+
+                    '<div id="tempatfotobarang'+counterfoto+'">'+
+                  '</div><br>'+
+                  '<br><button type="button" class="btn btn-danger add-on" onclick="delfoto('+counterfoto+')">Hapus</button>'+
+                '</div>'+
+              '</div>';
+      document.getElementById(divName).appendChild(newdiv);
+        counterfoto++;
+     }
+    }
+    window.addInputfoto=addInputfoto;
+  //fungsi hapus input
+    //=====================================================================
+    function delfoto(no) {
+      $('.foto'+no).remove();
+      counterfoto = counterfoto - 1;
+    }
+    window.delfoto=delfoto;
+    //==============================================================
+    $('#stokall').click(function(){
+      if ($('#hball').val()!=''){
+        $('.hargabeli').val($('#hball').val());
+      }
+      if($('#hjall').val()!=''){
+        $('.hargajual').val($('#hjall').val());
+      }
+      if($('#sall').val()!=''){
+        $('.stoknya').val($('#sall').val()); 
+      }
+    });
 });
 
 
