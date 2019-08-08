@@ -40,8 +40,8 @@
                   <div class="control-group">
                 <label class="control-label">Kode Produk :</label>
                 <div class="controls">
-                  <input type="text" class="span11" name="newkode" id="newkode" readonly value="{{$newkode}}">
-                  <input type="hidden" class="span11" name="kode" id="newkode" readonly value="{{$kode}}">
+                  <input type="text" class="span11" name="newkode" id="newkode" readonly value="">
+                  <input type="hidden" class="span11" name="kode" id="newkode" readonly value="">
                 </div>
               </div>
                   <div class="control-group">
