@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\File;
 
 class barangcontroller extends Controller
 {
@@ -18,9 +19,11 @@ class barangcontroller extends Controller
     public function index()
     {
         $data = DB::table('tb_kodebarang')
-        ->select(DB::raw('tb_kodebarang.*, tb_kategori.kategori as namakategori, tb_sub_kategori.nama as namasub'))
+        ->select(DB::raw('tb_kodebarang.*, tb_kategori.kategori as namakategori, tb_sub_kategori.nama as namasub,gambar.nama as namagambar'))
         ->leftjoin('tb_kategori','tb_kategori.id','=','tb_kodebarang.kategori')
         ->leftjoin('tb_sub_kategori','tb_sub_kategori.id','=','tb_kodebarang.subkategori')
+        ->leftjoin('gambar','gambar.kode_barang','=','tb_kodebarang.kode')
+        ->where('gambar.status','=','GU')
         ->orderby('id','desc')->get();
         return view('barang/index',['data'=>$data]);
     }
@@ -38,17 +41,17 @@ class barangcontroller extends Controller
         $newbulan   = $bulan*2+5;
          //----------------------------------
         $kodeuser   = sprintf("%02s",Auth::user()->id);
-        $lastuser   = $tanggal."".$kodeuser;
+        $lastuser   = $tanggal."-".$kodeuser;
             $kode = DB::table('tb_kodebarang')
             ->where('kode_asli','like','%'.$lastuser.'-%')
             ->max('kode_asli');
         //----------------------------------
             if(!$kode){
-                $finalkode      = $tanggal."".$kodeuser."-".sprintf("%03s",1);
+                $finalkode      = $tanggal."-".$kodeuser."-".sprintf("%03s",1);
                 $finalkodenew   = $newhari."".$newbulan."".$newtahun."".$kodeuser."-".sprintf("%03s",1);
             }else{
                 $newkode        = explode("-", $kode);
-                $nomer          = sprintf("%03s",$newkode[1]+1);
+                $nomer          = sprintf("%03s",$newkode[2]+1);
                 $finalkode      = $tanggal."-".$kodeuser."-".$nomer;
                 $finalkodenew   = $newhari."".$newbulan."".$newtahun."".$kodeuser."-".$nomer;
             }
@@ -73,26 +76,46 @@ class barangcontroller extends Controller
             'merk'        => $request->merk,
             'status'      => $request->status,
             'subvarian'   => $request->namasubvariasi,
-            'varian'      => $request->namavariasi
+            'varian'      => $request->namavariasi,
+            'kondisi'     => $request->kondisi,
+            'preorder'    => $request->preorder
         ]);
 
         //-----------------------------------------------
-        $i=0;
-        foreach ($request->variasisatu as $variasisatu){
-            $data[] = [
+        if ($request->variasisatu){
+            $i=0;
+            $nomer=1;
+            foreach ($request->variasisatu as $variasisatu){
+                $newkodevarian = $request->newkode.'-'.sprintf("%03s",$nomer);
+                $data[] = [
+                'kode_barang'   => $request->newkode,
+                'kode_varian'   => $newkodevarian,
+                'variasi'       => $variasisatu,
+                'subvariasi'    => $request->variasidua[$i],
+                'harga_beli'    => $request->harga[$i],
+                'harga_jual'    => $request->hargajual[$i],
+                'stok'          => $request->stok[$i]
+                ];
+                $i++;
+                $nomer++;
+            }
+            DB::table('tb_barang')->insert($data);
+        }else{
+             //-----------------------------------------------
+        if($request->stokdefault){
+           DB::table('tb_barang')->insert([
             'kode_barang'   => $request->newkode,
-            'variasi'       => $variasisatu,
-            'subvariasi'    => $request->variasidua[$i],
-            'harga_beli'    => $request->harga[$i],
-            'harga_jual'    => $request->hargajual[$i],
-            'stok'          => $request->stok[$i]
-            ];
-            $i++;
+            'harga_beli'    => $request->hargabelidefault,
+            'harga_jual'    => $request->hargajualdefault,
+            'stok'          => $request->stokdefault
+            ]);
         }
-        DB::table('tb_barang')->insert($data);
+        }
 
+       
         //-----------------------------------------------
-        foreach ($request->file('fotobarang') as $photos){
+        if($request->file('fotobarang')){
+            foreach ($request->file('fotobarang') as $photos){
             $namagambar=$photos->
             getClientOriginalname();
             $lower_file_name=strtolower($namagambar);
@@ -107,8 +130,10 @@ class barangcontroller extends Controller
                 'nama'        => $namagambar
             ];
            
+            }
+            DB::table('gambar')->insert($datafoto);
         }
-        DB::table('gambar')->insert($datafoto);
+        
 
         //------------------------------------------------
         if($request->hasFile('fotoutama')){
@@ -148,5 +173,46 @@ class barangcontroller extends Controller
         $subkategori = DB::table('tb_sub_kategori')->orderby('id','desc')->get();
         $merk = DB::table('tb_merk')->orderby('id','desc')->get();
         return view('barang/edit',['kategori'=>$kategori,'subkategori'=>$subkategori,'merk'=>$merk]);
+    }
+
+    //===============================================
+    public function arsipkanbarang($kode){
+        DB::table('tb_kodebarang')
+        ->where('kode',$kode)
+        ->update([
+            'status'=>'N'
+        ]);
+        return back()->with('status','Barang Berhasil Diarsipkan');
+    }
+
+    //===============================================
+    public function tampilkanbarang($kode){
+        DB::table('tb_kodebarang')
+        ->where('kode',$kode)
+        ->update([
+            'status'=>'Y'
+        ]);
+        return back()->with('status','Barang Berhasil Tampilkan');
+    }
+
+    //===============================================
+    public function hapusbarang($kode){
+        $foto = DB::table('gambar')->where('kode_barang',$kode)->get();
+        foreach ($foto as $row) {
+            File::delete('img/barang/'.$row->nama);
+        }
+
+        //-------------------------------
+        DB::table('tb_kodebarang')
+        ->where('kode',$kode)
+        ->delete();
+        return back()->with('status','Barang Berhasil Dihapus');
+    }
+
+    //===============================================
+    public function cetakqr($kode){
+        $databarang = DB::table('tb_kodebarang')->where('kode',$kode)->get();
+        $datavarian = DB::table('tb_barang')->where('kode_barang',$kode)->get();
+        return view('barang.cetakqr',['databarang'=>$databarang,'datavarian'=>$datavarian]);
     }
 }

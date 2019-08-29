@@ -48,6 +48,11 @@ Route::resource('setting','admin\settingcontroller');
 Route::resource('barang','admin\barangcontroller');
 Route::get('import-barang','admin\barangcontroller@import');
 Route::get('/carisubkategori/{id}','admin\barangcontroller@carisubkategori');
+Route::get('/arsipkan/{kode}','admin\barangcontroller@arsipkanbarang');
+Route::get('/tampilkanbarang/{kode}','admin\barangcontroller@tampilkanbarang');
+Route::get('/hapusbarang/{kode}','admin\barangcontroller@hapusbarang');
+Route::get('/cetakqr/{kode}','admin\barangcontroller@cetakqr');
+//auth
 Auth::routes();
 
 //merk

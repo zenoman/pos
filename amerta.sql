@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.1.30-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win32
--- HeidiSQL Version:             9.4.0.5174
+-- Server version:               10.3.16-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             10.2.0.5599
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -25,29 +25,15 @@ CREATE TABLE IF NOT EXISTS `gambar` (
   `nama` varchar(200) DEFAULT NULL,
   `status` enum('GU','GB') DEFAULT 'GB',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table amerta.gambar: ~17 rows (approximately)
+-- Dumping data for table amerta.gambar: ~2 rows (approximately)
 DELETE FROM `gambar`;
 /*!40000 ALTER TABLE `gambar` DISABLE KEYS */;
 INSERT INTO `gambar` (`id`, `kode_barang`, `nama`, `status`) VALUES
-	(1, '21214302-001', '1565248408-3.jpg', 'GB'),
-	(2, '21214302-001', '1565248408-13.jpg', 'GB'),
-	(3, '21214302-001', '1565248408-12.jpg', 'GB'),
-	(4, '21214302-001', '1565248408-7.jpg', 'GB'),
-	(5, '21214302-001', '1565248408-9.jpg', 'GU'),
-	(6, '21214302-002', '1565248925-6.jpg', 'GB'),
-	(7, '21214302-002', '1565248925-profile_avatar.jpg', 'GB'),
-	(8, '21214302-002', '1565248925-13.jpg', 'GB'),
-	(9, '21214302-002', '1565248925-1.jpg', 'GU'),
-	(10, '21214302-002', '1565251673-13.jpg', 'GB'),
-	(11, '21214302-002', '1565251673-7.jpg', 'GB'),
-	(12, '21214302-002', '1565251673-1.jpg', 'GU'),
-	(13, '21214302-002', '1565252714-13.jpg', 'GB'),
-	(14, '21214302-002', '1565252714-profile_avatar.jpg', 'GB'),
-	(15, '21214302-002', '1565252714-12.jpg', 'GB'),
-	(16, '21214302-002', '1565252714-11.jpg', 'GB'),
-	(17, '21214302-002', '1565252714-13.jpg', 'GU');
+	(3, '61214302-001', '1566982265-flat-icons-18-08.png', 'GU'),
+	(4, '61214302-002', '1566982564-shopping-bag-flat.png', 'GU'),
+	(5, '61214302-003', '1566982682-wifi.png', 'GU');
 /*!40000 ALTER TABLE `gambar` ENABLE KEYS */;
 
 -- Dumping structure for table amerta.kategori_artikel
@@ -105,7 +91,7 @@ DROP TABLE IF EXISTS `sliders`;
 CREATE TABLE IF NOT EXISTS `sliders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `judul` varchar(100) DEFAULT NULL,
-  `deskripsi` text,
+  `deskripsi` text DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
@@ -126,11 +112,11 @@ CREATE TABLE IF NOT EXISTS `tb_artikel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `judul` varchar(150) DEFAULT NULL,
   `link` varchar(150) DEFAULT NULL,
-  `isi` text,
+  `isi` text DEFAULT NULL,
   `tgl` date DEFAULT NULL,
   `id_kategori` int(11) DEFAULT NULL,
   `id_penulis` int(11) DEFAULT NULL,
-  `dilihat` int(11) DEFAULT '0',
+  `dilihat` int(11) DEFAULT 0,
   `gambar` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
@@ -172,34 +158,29 @@ CREATE TABLE IF NOT EXISTS `tb_barang` (
   `kode_barang` varchar(50) DEFAULT NULL,
   `variasi` varchar(50) DEFAULT NULL,
   `subvariasi` varchar(50) DEFAULT NULL,
-  `harga_beli` int(11) DEFAULT '0',
-  `harga_jual` int(11) DEFAULT '0',
-  `stok` int(11) DEFAULT '0',
+  `harga_beli` int(11) DEFAULT 0,
+  `harga_jual` int(11) DEFAULT 0,
+  `stok` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
--- Dumping data for table amerta.tb_barang: ~18 rows (approximately)
+-- Dumping data for table amerta.tb_barang: ~12 rows (approximately)
 DELETE FROM `tb_barang`;
 /*!40000 ALTER TABLE `tb_barang` DISABLE KEYS */;
 INSERT INTO `tb_barang` (`id`, `kode_barang`, `variasi`, `subvariasi`, `harga_beli`, `harga_jual`, `stok`) VALUES
-	(1, '21214302-001', 'merah', '1 kg', 20000, 30000, 40),
-	(2, '21214302-001', 'merah', '2 kg', 20000, 30000, 40),
-	(3, '21214302-001', 'biru', '1 kg', 20000, 30000, 40),
-	(4, '21214302-001', 'biru', '2 kg', 20000, 30000, 40),
-	(5, '21214302-001', 'putih', '1 kg', 20000, 30000, 40),
-	(6, '21214302-001', 'putih', '2 kg', 20000, 30000, 40),
-	(7, '21214302-002', 'l', 'coklat', 40000, 45000, 10),
-	(8, '21214302-002', 'l', 'coklat gelap', 40000, 45000, 10),
-	(9, '21214302-002', 'xl', 'coklat', 40000, 45000, 10),
-	(10, '21214302-002', 'xl', 'coklat gelap', 40000, 45000, 10),
-	(11, '21214302-002', 'xxl', 'coklat', 40000, 45000, 10),
-	(12, '21214302-002', 'xxl', 'coklat gelap', 40000, 45000, 10),
-	(13, '21214302-002', 'merah', NULL, 2000, 3000, 10),
-	(14, '21214302-002', 'hitam', NULL, 2000, 3000, 10),
-	(15, '21214302-002', 'merah', 'xl', 2000, 3000, 10),
-	(16, '21214302-002', 'merah', 'l', 2000, 3000, 10),
-	(17, '21214302-002', 'berah', 'xl', 2000, 3000, 10),
-	(18, '21214302-002', 'berah', 'l', 2000, 3000, 10);
+	(5, '61214302-001', 'merah', 'l', 2000, 2000, 20),
+	(6, '61214302-001', 'merah', 'm', 2000, 2000, 20),
+	(7, '61214302-001', 'merah', 'xl', 2000, 2000, 20),
+	(8, '61214302-001', 'biru', 'l', 2000, 2000, 20),
+	(9, '61214302-001', 'biru', 'm', 2000, 2000, 20),
+	(10, '61214302-001', 'biru', 'xl', 2000, 2000, 20),
+	(11, '61214302-001', 'putih', 'xl', 2000, 2000, 20),
+	(12, '61214302-001', NULL, NULL, 1300, 13000, 13),
+	(13, '61214302-002', 'kevlar', 'biru', 30, 30, 30),
+	(14, '61214302-002', 'kevlar', 'merah', 30, 30, 30),
+	(15, '61214302-002', 'jean', 'biru', 30, 30, 30),
+	(16, '61214302-002', 'jean', 'merah', 30, 30, 30),
+	(17, '61214302-003', NULL, NULL, 2000, 2000, 2000);
 /*!40000 ALTER TABLE `tb_barang` ENABLE KEYS */;
 
 -- Dumping structure for table amerta.tb_barang_uom
@@ -252,24 +233,25 @@ CREATE TABLE IF NOT EXISTS `tb_kodebarang` (
   `nama` varchar(200) DEFAULT NULL,
   `asal` varchar(200) DEFAULT NULL,
   `bahan` varchar(200) DEFAULT NULL,
-  `deskripsi` text,
+  `deskripsi` text DEFAULT NULL,
   `kategori` int(11) DEFAULT NULL,
   `subkategori` int(11) DEFAULT NULL,
   `merk` int(11) DEFAULT NULL,
   `varian` varchar(50) DEFAULT 'kosong',
   `subvarian` varchar(60) DEFAULT 'kosong',
   `status` enum('Y','N') DEFAULT 'N',
+  `preorder` enum('Y','N') DEFAULT 'N',
+  `kondisi` enum('Baru','Pernah Dipakai') DEFAULT 'Baru',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table amerta.tb_kodebarang: ~3 rows (approximately)
+-- Dumping data for table amerta.tb_kodebarang: ~2 rows (approximately)
 DELETE FROM `tb_kodebarang`;
 /*!40000 ALTER TABLE `tb_kodebarang` DISABLE KEYS */;
-INSERT INTO `tb_kodebarang` (`id`, `kode_asli`, `kode`, `nama`, `asal`, `bahan`, `deskripsi`, `kategori`, `subkategori`, `merk`, `varian`, `subvarian`, `status`) VALUES
-	(1, '08081902-001', '21214302-001', 'baju', 'gurah', 'katun', 'deskripsi baju', 2, 3, 3, 'warna', 'berat', 'N'),
-	(2, '080819-02-002', '21214302-002', 'big milk pra one', 'gurah kediri', 'katun', 'deskripsi shape 3d', 1, 2, 2, 'size', 'warna', 'Y'),
-	(3, '080819-02-002', '21214302-002', 'kaos kutang', 'gurah', 'katun', 'halo halo', 2, NULL, 2, 'warna', NULL, 'N'),
-	(4, '080819-02-002', '21214302-002', 'baju', 'gurah', 'hlo', 'sakdlfjklasd', 2, 3, 3, 'warna', 'size', 'Y');
+INSERT INTO `tb_kodebarang` (`id`, `kode_asli`, `kode`, `nama`, `asal`, `bahan`, `deskripsi`, `kategori`, `subkategori`, `merk`, `varian`, `subvarian`, `status`, `preorder`, `kondisi`) VALUES
+	(3, '280819-02-001', '61214302-001', 'celana cewek', 'sakldfj', '9238490', 'askldfj kasfdjkl', 2, 3, 3, 'warna', 'size', 'Y', 'N', 'Baru'),
+	(4, '280819-02-002', '61214302-002', 'kemeja', 'asdf', '092890', 'kalsf askdfjkla s', 2, 3, 3, 'bahan', 'warna', 'N', 'N', 'Baru'),
+	(5, '280819-02-003', '61214302-003', 'asdfkj', 'klasdf', 'sakdlf', 'lksdfjl', 2, 3, 3, NULL, NULL, 'Y', 'N', 'Baru');
 /*!40000 ALTER TABLE `tb_kodebarang` ENABLE KEYS */;
 
 -- Dumping structure for table amerta.tb_merk
@@ -277,7 +259,7 @@ DROP TABLE IF EXISTS `tb_merk`;
 CREATE TABLE IF NOT EXISTS `tb_merk` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) DEFAULT NULL,
-  `gambar` text,
+  `gambar` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -299,13 +281,13 @@ CREATE TABLE IF NOT EXISTS `tb_setting` (
   `kontak3` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `ico` varchar(45) DEFAULT NULL,
-  `meta` text,
+  `meta` text DEFAULT NULL,
   `logo` varchar(50) DEFAULT NULL,
-  `keterangan` text,
-  `alamat` text,
+  `keterangan` text DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
   `nama_toko` int(11) DEFAULT NULL,
   `max_tgl` int(5) DEFAULT NULL,
-  `peraturan` text,
+  `peraturan` text DEFAULT NULL,
   `bulansistem` int(11) DEFAULT NULL,
   PRIMARY KEY (`idsettings`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
@@ -339,13 +321,13 @@ DROP TABLE IF EXISTS `tb_supplier`;
 CREATE TABLE IF NOT EXISTS `tb_supplier` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) DEFAULT NULL,
-  `alamat` text,
+  `alamat` text DEFAULT NULL,
   `no_telp` varchar(20) DEFAULT NULL,
-  `keterangan` text,
+  `keterangan` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table amerta.tb_supplier: ~3 rows (approximately)
+-- Dumping data for table amerta.tb_supplier: ~2 rows (approximately)
 DELETE FROM `tb_supplier`;
 /*!40000 ALTER TABLE `tb_supplier` DISABLE KEYS */;
 INSERT INTO `tb_supplier` (`id`, `nama`, `alamat`, `no_telp`, `keterangan`) VALUES
@@ -410,6 +392,17 @@ INSERT INTO `users` (`id`, `name`, `no_telp`, `username`, `level`, `email`, `pas
 	(4, 'owner', '032984290', 'owner', 'super_admin', 'owner123@gmal.com', '$2y$10$MiDu8/owBFbvwzQqZRkubOmrE/aG8GIY.29ngaZLpGc28CEpDfGQW'),
 	(5, 'admin', '203849320', 'admin', 'admin', 'admin@gmail.com', '$2y$10$9XpmTwNA4ZEo7O1OgFO89eYCOnR1xy9u2TkzPx6j9XR88L.r80UAq');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Dumping structure for trigger amerta.tb_kodebarang_before_delete
+DROP TRIGGER IF EXISTS `tb_kodebarang_before_delete`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `tb_kodebarang_before_delete` BEFORE DELETE ON `tb_kodebarang` FOR EACH ROW BEGIN
+delete from tb_barang where kode_barang=old.kode;
+delete from gambar where kode_barang=old.kode;
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

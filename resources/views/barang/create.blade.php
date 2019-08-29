@@ -21,7 +21,7 @@
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box" id="panelnya">
-          <form action="{{url('barang')}}" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+          <form action="{{url('barang')}}" method="post" enctype="multipart/form-data" onsubmit="return checkform()" id="forminput">
           <div class="widget-title"> <span class="icon"> <i class="icon-plus"></i> </span>
             <h5>Tambah Data Barang</h5>
           </div>
@@ -60,7 +60,7 @@
                 <label class="control-label">*Kategori & sub Kategori :</label>
                 <div class="controls">
                   <select name="kategori" id="kategori" class="span5">
-                    <option selected disabled hidden>pilih kategori</option>
+                    <option selected disabled hidden value="kosong">pilih kategori</option>
                     @foreach($kategori as $kat)
                     <option value="{{$kat->id}}">{{$kat->kategori}}</option>
                     @endforeach
@@ -105,6 +105,26 @@
                 <h5>Informasi Penjualan</h5>
               </div>
               <div class="widget-content">
+                <div class="form-horizontal variandefault">
+                <div class="control-group">
+                <label class="control-label">Stok (Pcs)* :</label>
+                <div class="controls">
+                  <input type="number" min="0" name="stokdefault" id="stokdefault" class="span11" required>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Harga Beli* :</label>
+                <div class="controls">
+                  <input type="number" min="0" name="hargabelidefault" id="hargabelidefault" class="span11" required>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Harga Jual* :</label>
+                <div class="controls">
+                  <input type="number" min="0" name="hargajualdefault" id="hargajualdefault" class="span11" required>
+                </div>
+              </div>
+            </div>
                 <div class="form-horizontal">
                   <div class="control-group">
                 <label class="control-label">Variasi 1 :</label>
@@ -150,8 +170,6 @@
                   <span class="span6 text-right"> 
                     <button type="button" id="addinputdua" class="btn btn-primary btn-block add-on" onClick="addInputdua('dynamicInput2');">Tambah Variasi 2</button> 
                   </span>
-                  
-                  
                 </div>
                <br><br>
               </div>
@@ -167,12 +185,12 @@
                     <input type="number" min="0" id="hjall">
                   </span>
                    <span class="span3">
-                    <label>Stok</label> 
+                    <label>Stok (Pcs)</label> 
                     <input type="number" min="0" id="sall">
                   </span>
                   <span class="span3">
                     <label>&nbsp;</label> 
-                    <button type="button" class="btn btn-success" id="stokall">Aplikasikan Untuk Semua Varian</button>
+                    <button type="button" class="btn btn-info" id="stokall">Terapkan Untuk Semua Varian</button>
                   </span>
                   
                   
@@ -211,7 +229,7 @@
               <div class="widget-content">
                 <div class="form-horizontal">
                   <div class="control-group">
-                <label class="control-label">Foto Utama :</label>
+                <label class="control-label">*Foto Utama :</label>
                 <div class="controls">
                   @csrf
                   <input type="file" id="upload" name="fotoutama" class="span11">
@@ -260,22 +278,34 @@
                 <h5>Simpan Data</h5>
               </div>
               <div class="widget-content">
-                <div class="form-horizontal">
+                
+                 <div class="form-horizontal">
                   <div class="control-group">
-                <label class="control-label">Status :</label>
+                <label class="control-label">Pre Order :</label>
                 <div class="controls">
-                  <select name="status" id="status" class="span11">
-                    <option value="N">Arsipkan</option>
-                    <option value="Y">Simpan</option>
+                  <select name="preorder" id="preorder" class="span11">
+                    <option value="N">Tidak</option>
+                    <option value="Y">Ya</option>
                   </select>
                 </div>
               </div>
-             
+             </div>
+              <div class="form-horizontal">
+                  <div class="control-group">
+                <label class="control-label">Kondisi :</label>
+                <div class="controls">
+                  <select name="kondisi" id="kondisi" class="span11">
+                    <option value="Baru">Baru</option>
+                    <option value="Pernah Dipakai">Pernah Dipakai</option>
+                  </select>
+                  <input type="hidden" name="status" value="Y" id="status">
                 </div>
-                
+              </div>
+             </div>
               </div>
               <div class="widget-content text-right">
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" id="arsipkandata" class="btn btn-warning">Arsipkan</button>
+                <button type="button" id="simpandata" class="btn btn-primary">Simpan</button>
                 <button type="button" class="btn btn-danger" onclick="history.go(-1)">Kembali</button>
               </div>
             </div>

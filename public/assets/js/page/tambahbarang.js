@@ -115,11 +115,13 @@ $(document).ready(function() {
         $('#hball').val('');
         $('#hjall').val('');
         $('#sall').val('');
+        $('.variandefault').show();
         managerow();
       }else{
         $('#addinput').show();
         $('#tabelvariasi').show();
         $('#hargaall').show();
+        $('.variandefault').hide();
         managerow();
       }
 
@@ -374,6 +376,46 @@ $(document).ready(function() {
       
     }
     window.checkform = checkform;
+    //===========================================================
+    $('#simpandata').click(function(){
+      if(confirm('Simpan Data Barang ?')){
+        $('#status').val('Y');
+        if($('#namaproduk').val()==''||
+          $('#deskripsi').val()==''||
+          $('#asal').val()==''||
+          $('#bahan').val()==''||
+          $('#upload').val()==''||
+          $('#kategori').val()=='kosong'){
+          alert('Maaf, Isi data dengan label berbintang');  
+        }else{
+          $('#forminput').submit();  
+        }
+      }
+    });
+    //===========================================================
+    $('#arsipkandata').click(function(){
+      if(confirm('Arsipkan Data Barang ?')){
+        $('#status').val('N');
+        if($('#namaproduk').val()==''||
+          $('#deskripsi').val()==''||
+          $('#asal').val()==''||
+          $('#bahan').val()==''||
+          $('#upload').val()==''||
+          $('#kategori').val()=='kosong'){
+          alert('Maaf, Isi data dengan label berbintang');  
+        }else{
+          if($('#variasisatu1').val()==''){
+            if ($('#stokdefault')=='' || $('#hargabelidefault')=='' || $('#hargajualdefault')==''){
+              alert('Maaf, Isi data dengan label berbintang'); 
+            }else{
+             $('#forminput').submit();  
+            }
+          }else{
+             $('#forminput').submit();  
+            }
+        }
+      }
+    });
 });
 
 
